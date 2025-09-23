@@ -1,0 +1,39 @@
+:root {
+    --color-text: #f9f7f3;
+    --background-footer: #333333;
+    --color-link: #ffb200;
+}
+
+footer {
+    width: 100%;
+}
+
+.container-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0px;
+    background-color: var(--background-footer);
+}
+
+.footer-contact,
+.footer-copyright {
+    display: flex;
+    gap: 10px;
+}
+
+.footer-copyright p,
+.footer-copyright p span,
+.footer-copyright span {
+    color: var(--color-text);
+}
+
+.footer-contact .icon-big {
+    font-size: 2rem;
+    color: var(--color-link);
+}
+
+.footer-copyright p a {
+    color: var(--color-link);
+}

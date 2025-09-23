@@ -1,0 +1,23 @@
+.container-options {
+    width: 330px;
+    background-color: #faf9f9;
+    border-radius: 10px;
+    padding: 10px 5px;
+    margin: 20px 10px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.menu-list a:hover,
+.menu-list a i:hover,
+.menu-list li a:hover,
+.menu-list li a i:hover {
+    color: #219ebc;
+    transition: all 0.3s ease;
+}

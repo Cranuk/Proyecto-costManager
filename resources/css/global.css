@@ -1,0 +1,168 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: #282C34;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+}
+
+body {
+    background-color: #f4f3ee;
+}
+
+main {
+    min-height: 80vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+.space-5 {
+    margin-top: 5px;
+}
+
+.space-10 {
+    margin-top: 10px;
+}
+
+.space-20 {
+    margin-top: 20px;
+}
+
+.space-30 {
+    margin-top: 30px;
+}
+
+.center {
+    text-align: center;
+}
+
+.icon-head {
+    display: block;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.icon-small {
+    font-size: 1.5rem;
+}
+
+.icon-medium {
+    font-size: 2.5rem;
+}
+
+.icon-big {
+    font-size: 4rem;
+}
+
+.container {
+    width: 100%;
+}
+
+.container-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.subtitle {
+    font-size: 1.6rem;
+}
+
+.underlined {
+    text-decoration: underline;
+}
+
+.delete-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.button-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}
+
+.header-page {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.alert-box {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    height: 20vh;
+}
+
+.alert {
+    width: fit-content;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #faf9f9;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.alert-notice {
+    background-color: #faf9f9;
+}
+
+.categorie-expenses {
+    color: #ef233c;
+}
+
+.categorie-revenues {
+    color: #0077b6;
+}
+
+.categorie-expenses,
+.categorie-revenues {
+    padding: 0px 20px;
+}
+
+.pagination-box nav {
+    width: 100%;
+    padding: 0px;
+    position: initial;
+    border: none;
+    transition: none;
+}
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+}
+
+.pagination .page-item .page-link {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--arrow-color);
+}
