@@ -58,14 +58,17 @@ class ExpenseController extends Controller
         try {
             $id = $request -> input('id');
             $category = $request -> input('category');
+            $date = $request -> input('date');
             $description = $request -> input('description');
             $amount = $request -> input('amount');
-            $update = Carbon::now()->format('Y-m-d');
+            $fullDate = Carbon::parse($date)->setTimeFrom(Carbon::now());
+            $update = Carbon::now();
             DB::table('expenses')->where('id','=',$id)
                                 ->update([
-                                    'category_id' => $category, 
+                                    'category_id' => $category,
                                     'description' => $description,
                                     'amount' => $amount,
+                                    'created_at' => $fullDate,
                                     'updated_at' => $update
                                 ]);
             return redirect()->route('expense')
@@ -81,10 +84,12 @@ class ExpenseController extends Controller
             $description = $request -> input('description');
             $amount = $request -> input('amount');
             $category = $request -> input('category');
+            $date = $request -> input('date') ?? Carbon::now();
             DB::table('expenses')->insert([
                                     'category_id' => $category,
                                     'description' => $description,
-                                    'amount' => $amount
+                                    'amount' => $amount,
+                                    'created_at' => $date
                                 ]);
             return redirect()->route('expense')
                             ->with('status', 'Operación realizada con éxito.');

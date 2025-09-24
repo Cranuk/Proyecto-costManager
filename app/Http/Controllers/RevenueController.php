@@ -56,13 +56,18 @@ class RevenueController extends Controller
         try {
             $id = $request -> input('id');
             $category = $request -> input('category');
+            $date = $request -> input('date');
             $description = $request -> input('description');
             $amount = $request -> input('amount');
+            $fullDate = Carbon::parse($date)->setTimeFrom(Carbon::now());
+            $update = Carbon::now();
             DB::table('revenues')->where('id','=',$id)
                                 ->update([
                                     'category_id' => $category, 
                                     'description' => $description,
-                                    'amount' => $amount
+                                    'amount' => $amount,
+                                    'created_at' => $fullDate,
+                                    'updated_at' => $update
                                 ]);
             return redirect()->route('revenue')
                             ->with('status', 'Operación realizada con éxito.');
@@ -77,10 +82,12 @@ class RevenueController extends Controller
             $description = $request -> input('description');
             $amount = $request -> input('amount');
             $category = $request -> input('category');
+            $date = $request -> input('date') ?? Carbon::now();
             DB::table('revenues')->insert([
                                     'category_id' => $category,
                                     'description' => $description,
-                                    'amount' => $amount
+                                    'amount' => $amount,
+                                    'created_at' => $date
                                 ]);
             return redirect()->route('revenue')
                             ->with('status', 'Operación realizada con éxito.');

@@ -46,6 +46,9 @@ $route = isset($edit) ? 'revenueUpdate' : 'revenueSave';
         @endforeach
     </select>
 
+    <label for="date">Fecha de gasto:</label>
+    <input type="date" name="date" class="input-text">
+
     <label for="description" class="label-text">Descripcion:</label>
     <textarea name="description" class="input-textarea" cols="29" rows="5">{{ $edit->description ?? '' }}</textarea>
 

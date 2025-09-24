@@ -21,7 +21,6 @@
             <tr>
                 <th>Titulo</th>
                 <th>Descripcion</th>
-                <th>Fecha</th>
                 <th>Herramientas</th>
             </tr>
         </thead>
@@ -36,9 +35,6 @@
                     {{ $category->name }}
                 </td>
                 <td>{{ $category->description }}</td>
-                <td>
-                    @formatDate($category->updated_at)
-                </td>
                 <td>
                     <div class="tools">
                         <a href="{{ route('categoryEdit', ['id'=>$category->id]) }}">

@@ -8,7 +8,7 @@
         <a href="{{ route('index') }}" title="Volver">
             <i class='bx bx-arrow-back icon-medium'></i>
         </a>
-        <a href="{{ route('revenueCreate')}}" title="Agregar categoria">
+        <a href="{{ route('revenueCreate')}}" title="Agregar ingresos">
             <i class='bx bxs-cart-add icon-medium'></i>
         </a>
     </div>
