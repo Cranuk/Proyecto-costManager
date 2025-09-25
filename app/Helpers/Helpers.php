@@ -2,9 +2,10 @@
 
 namespace App\Helpers;
 
+use App\Models\Expense;
+use App\Models\Revenue;
 use Carbon\Carbon;
 use NumberFormatter;
-use Illuminate\Support\Facades\DB;
 
 class Helpers
 {
@@ -26,28 +27,28 @@ class Helpers
     }
 
     // NOTE: funciones para balance
-    public static function getBalanceNegative()
+    public static function getBalanceNegative(?Carbon $date = null)
     {
-        $month = Carbon::now()->month;
-        $amountNegative = DB::table('expenses')
-            ->whereMonth('created_at', '=', $month)
+        $date ??= Carbon::now();
+        $amountNegative = Expense::whereMonth('created_at',$date->month)
+            ->whereYear('created_at', $date->year)
             ->sum('amount');
         return $amountNegative;
     }
 
-    public static function getBalancePositive()
+    public static function getBalancePositive(?Carbon $date = null)
     {
-        $month = Carbon::now()->month;
-        $amountPositive = DB::table('revenues')
-            ->whereMonth('created_at', '=', $month)
+        $date ??= Carbon::now();
+        $amountPositive = Revenue::whereMonth('created_at', $date->month)
+            ->whereYear('created_at', $date->year)
             ->sum('amount');
         return $amountPositive;
     }
 
-    public static function getBalance()
+    public static function getBalance(?Carbon $date = null)
     {
-        $balanceNegative = self::getBalanceNegative();
-        $balancePositive = self::getBalancePositive();
+        $balanceNegative = self::getBalanceNegative($date);
+        $balancePositive = self::getBalancePositive($date);
         $balanceTotal = $balancePositive - $balanceNegative;
         return [
             'balanceNegative' => $balanceNegative,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,9 +11,9 @@ class CategoryController extends Controller
 {
     // NOTE: funciones para categorias
     public function index(){
-        $categories = DB::table('categories')->orderBy('typeCategory','desc')
-                                            ->orderBy('name','asc')
-                                            ->paginate(10);
+        $categories = Category::orderBy('typeCategory','desc')
+                                ->orderBy('name','asc')
+                                ->paginate(10);
         $count = $categories->total();
         return view('categories.index',[
             'table' => $categories,
@@ -26,8 +27,8 @@ class CategoryController extends Controller
 
     public function delete($id){
         try {
-            DB::table('categories')->where('id', '=', $id)
-                                ->delete();
+            $category = Category::find($id);
+            $category->delete();
             return redirect()->route('category')
                             ->with('status', 'Se elimino correctamente');
         } catch (\Exception $e) {
@@ -37,11 +38,10 @@ class CategoryController extends Controller
     }
 
     public function edit($id){
-        $edit = DB::table('categories')->where('id','=',$id)
-                                    ->first(); // NOTE: buscamos los datos
+        $edit = Category::find($id);
         return view('categories.create',[
             'edit' => $edit
-        ]); // NOTE: enviamos los datos a donde los seteamos
+        ]);
     }
 
     public function update(Request $request){
@@ -50,14 +50,13 @@ class CategoryController extends Controller
             $name = $request -> input('name');
             $description = $request -> input('description');
             $typeCategory = $request -> input('typeCategory');
-            $update = Carbon::now()->format('Y-m-d');
-            DB::table('categories')->where('id','=',$id)
-                                ->update([
-                                    'name' => $name,
-                                    'description' => $description,
-                                    'typeCategory' => $typeCategory,
-                                    'updated_at' => $update
-                                ]);
+
+            $category = Category::find($id);
+            $category::update([
+                'name' => $name,
+                'description' => $description,
+                'typeCategory' => $typeCategory
+            ]);
             return redirect()->route('category')
                             ->with('status', 'Operación realizada con éxito.');
         } catch (\Exception $e) {
@@ -68,15 +67,11 @@ class CategoryController extends Controller
 
     public function save(Request $request){
         try {
-            $name = $request -> input('name');
-            $description = $request -> input('description');
-            $typeCategory = $request -> input('typeCategory');
-            DB::table('categories')
-                                ->insert([
-                                    'name' => $name,
-                                    'description' => $description,
-                                    'typeCategory' => $typeCategory
-                                ]);
+            Category::create([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'typeCategory' => $request->input('typeCategory')
+            ]);
             return redirect()->route('category')
                             ->with('status', 'Operación realizada con éxito.');
         } catch (\Exception $e) {

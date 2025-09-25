@@ -3,12 +3,12 @@
 @section('title', 'Pagina de inicio')
 
 @section('content-main')
-@if($balances['balancePositive'] > 0)
+@if($balances['balancePositive'])
 <div class="container-balances">
     <div class="balances-label">
         <p>Ingresos</p>
         <p>Gastos</p>
-        <p class="balances-total">Total</p>
+        <p class="balances-total">Disponible</p>
     </div>
     <div class="balances-number">
         <p>@formatCurrency($balances['balancePositive'])</p>

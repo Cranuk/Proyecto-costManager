@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Expense;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ExpenseController extends Controller
 {
@@ -12,12 +13,11 @@ class ExpenseController extends Controller
 
     public function index(){
         $month = Carbon::now()->month;
-        $expenses = DB::table('expenses')
-                    ->whereMonth('created_at','=',$month)
+        $expenses = Expense::whereMonth('created_at','=',$month)
                     ->orderBy('created_at','desc')
                     ->paginate(10);
         $count = $expenses->total();
-        $categories = DB::table('categories')->get(); // NOTE: Nos traemos datos de la tabla categorias
+        $categories = Category::where('typeCategory', 1)->get(); // NOTE: Nos traemos datos de la tabla categorias
         return view('expenses.index',[
             'table' => $expenses,
             'count' => $count,
@@ -26,7 +26,7 @@ class ExpenseController extends Controller
     }
 
     public function create(){
-        $categories = DB::table('categories')->get(); // NOTE: Nos traemos datos de la tabla categorias
+        $categories = Category::where('typeCategory', 1)->get(); // NOTE: Nos traemos datos de la tabla categorias
         return view('expenses.create',[
             'categories' => $categories // NOTE: estos datos son para cargar el select de categorias
         ]);
@@ -34,8 +34,8 @@ class ExpenseController extends Controller
 
     public function delete($id){
         try {
-            DB::table('expenses')->where('id', '=', $id)
-                                ->delete();
+            $expense = Expense::find($id);
+            $expense->delete();
             return redirect()->route('expense')
                             ->with('status', 'Se elimino correctamente');
         } catch (\Exception $e) {
@@ -45,13 +45,12 @@ class ExpenseController extends Controller
     }
 
     public function edit($id){
-        $categories = DB::table('categories')->get(); // NOTE: Nos traemos datos de la tabla categorias
-        $edit = DB::table('expenses')->where('id','=',$id)
-                                    ->first(); // NOTE: buscamos los datos
+        $categories = Category::where('typeCategory', 1)->get(); // NOTE: Nos traemos datos de la tabla categorias
+        $edit = Expense::find($id);
         return view('expenses.create',[
             'edit' => $edit,
             'categories' => $categories
-        ]); // NOTE: enviamos los datos a donde los seteamos
+        ]);
     }
 
     public function update(Request $request){
@@ -62,15 +61,14 @@ class ExpenseController extends Controller
             $description = $request -> input('description');
             $amount = $request -> input('amount');
             $fullDate = Carbon::parse($date)->setTimeFrom(Carbon::now());
-            $update = Carbon::now();
-            DB::table('expenses')->where('id','=',$id)
-                                ->update([
-                                    'category_id' => $category,
-                                    'description' => $description,
-                                    'amount' => $amount,
-                                    'created_at' => $fullDate,
-                                    'updated_at' => $update
-                                ]);
+
+            $expense = Expense::find($id);
+            $expense->update([
+                'category_id' => $category,
+                'description' => $description,
+                'amount' => $amount,
+                'created_at' => $fullDate,
+            ]);
             return redirect()->route('expense')
                             ->with('status', 'Operación realizada con éxito.');
         } catch (\Exception $e) {
@@ -84,13 +82,12 @@ class ExpenseController extends Controller
             $description = $request -> input('description');
             $amount = $request -> input('amount');
             $category = $request -> input('category');
-            $date = $request -> input('date') ?? Carbon::now();
-            DB::table('expenses')->insert([
-                                    'category_id' => $category,
-                                    'description' => $description,
-                                    'amount' => $amount,
-                                    'created_at' => $date
-                                ]);
+
+            Expense::create([
+                'category_id' => $category,
+                'description' => $description,
+                'amount' => $amount
+            ]);
             return redirect()->route('expense')
                             ->with('status', 'Operación realizada con éxito.');
         } catch (\Exception $e) {
