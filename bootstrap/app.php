@@ -20,6 +20,6 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withSchedule(function (Schedule $schedule) {
+        $schedule->job(new TestJob)->monthlyOn(1, '00:00');
         $schedule->job(new MonthlyBalanceJob)->monthlyOn(1, '00:00');
-        $schedule->job(new TestJob)->daily();
     })->create();

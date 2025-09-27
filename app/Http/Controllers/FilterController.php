@@ -10,16 +10,15 @@ class FilterController extends Controller
 {
     public function date(){
         $currentYear = Carbon::now()->year; // Año actual
-        $startYear = $currentYear - 5; // NOTE: iniciar desde 5 años atrás
-        $endYear = $currentYear + 5; // NOTE: hasta 5 años adelante
-        
+        $startYear = 2020; // NOTE: año limite inferior
+        $endYear = $currentYear; // NOTE: limite seria el año actual
         $years = range($startYear, $endYear); // NOTE: Generamos los anios entre esos rangos
         
-        // NOTE: Obtener nombres de meses en formato numérico
-        $months = [];
-        for ($i = 1; $i <= 12; $i++) {
-            $months[$i] = Carbon::create()->month($i)->format('F'); // NOTE: 'F' devuelve el nombre completo del mes
-        }
+        // NOTE: Generamos los meses en formato traducido
+        $months = array_map(function($m) {
+            return Carbon::create()->month($m)->translatedFormat('F');
+        }, range(1, 12));
+        $months = array_combine(range(1, 12), $months);
         
         return response()->json([
             'years' => $years,
@@ -28,28 +27,28 @@ class FilterController extends Controller
     }
 
     public function filter(Request $request){
-        $data = $request -> input('table'); // NOTE: indica a que tabla se realiza la busqueda
-        $month = $request -> input('month');
-        $year = $request -> input('year');
+        $allowedTables = ['expenses', 'revenues']; // NOTE: Tablas permitidas
 
-        $table = DB::table($data)
-                    ->whereMonth('created_at','=',$month)
-                    ->whereYear('created_at', '=', $year)
-                    ->get();
+        $tableName = $request->input('table');
+        $month = $request->input('month');
+        $year = $request->input('year');
 
-        $count = DB::table($data)
-                    ->whereMonth('created_at','=',$month)
-                    ->whereYear('created_at', '=', $year)
-                    ->count();
+        if (!in_array($tableName, $allowedTables)) {
+            abort(400, 'Tabla no permitida.');
+        }
 
-        $categories = DB::table('categories')->get(); // NOTE: Nos traemos datos de la tabla categorias
+        $query = DB::table($tableName)
+            ->whereMonth('created_at', '=', $month)
+            ->whereYear('created_at', '=', $year);
 
-        $page = $data.'.index';
+        $records = $query->paginate(10);
+        $count = $records->count();
 
-        return view($page,[
-            'table' => $table,
-            'count' => $count,
-            'categories' => $categories
+        $page = $tableName . '.index';
+
+        return view($page, [
+            'table' => $records,
+            'count' => $count
         ]);
     }
 }

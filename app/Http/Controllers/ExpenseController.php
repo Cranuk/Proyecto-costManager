@@ -17,11 +17,9 @@ class ExpenseController extends Controller
                     ->orderBy('created_at','desc')
                     ->paginate(10);
         $count = $expenses->total();
-        $categories = Category::where('typeCategory', 1)->get(); // NOTE: Nos traemos datos de la tabla categorias
         return view('expenses.index',[
             'table' => $expenses,
-            'count' => $count,
-            'categories' => $categories
+            'count' => $count
         ]);
     }
 

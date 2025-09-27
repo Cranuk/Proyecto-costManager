@@ -2,15 +2,12 @@
 
 namespace App\Jobs;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
 
-class TestJob implements ShouldQueue
+class TestJob
 {
-    use Queueable;
     public function handle(): void
     {
-        Log::info('----Test de job con cola de trabajo------');
+        Log::info('----Se realizo el guardado del balance del mes anterior------');
     }
 }

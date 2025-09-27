@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Carbon::setLocale('es');
+        
         // Directiva para fecha
         Blade::directive('formatDate', function ($date) {
             return "<?php echo \App\Helpers\Helpers::formatDate($date); ?>";
@@ -42,6 +45,11 @@ class AppServiceProvider extends ServiceProvider
 
         Blade::directive('balanceNegative', function () {
             return "<?php echo \App\Helpers\Helpers::getBalance()['balanceNegative']; ?>";
+        });
+
+        // Directiva para nombre de categoria
+        Blade::directive('nameCategory', function ($id) {
+            return "<?php echo \App\Helpers\Helpers::nameCategory($id); ?>";
         });
     }
 }

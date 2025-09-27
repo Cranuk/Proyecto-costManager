@@ -21,6 +21,11 @@
                     <i class='bx bxs-bank icon-big'></i>
                 </a>
             </li>
+            <li>
+                <a href="#" title='Reportes'>
+                    <i class='bx bxs-calendar-alt icon-big'></i>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>

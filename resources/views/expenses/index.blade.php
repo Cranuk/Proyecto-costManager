@@ -33,11 +33,7 @@
             @foreach($table as $expense)
             <tr>
                 <td>
-                    @foreach($categories as $category)
-                    @if($category->id == $expense->category_id)
-                    {{ $category->name }}
-                    @endif
-                    @endforeach
+                    @nameCategory($expense->category_id)
                 </td>
                 <td>{{ $expense->description }}</td>
                 <td>

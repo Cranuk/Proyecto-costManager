@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\Category;
 use App\Models\Expense;
 use App\Models\Revenue;
 use Carbon\Carbon;
@@ -55,5 +56,11 @@ class Helpers
             'balancePositive' => $balancePositive,
             'balanceTotal' => $balanceTotal
         ];
+    }
+
+    public static function nameCategory($id)
+    {
+        $category = Category::find($id);
+        return $category->name;
     }
 }

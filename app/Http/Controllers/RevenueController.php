@@ -15,11 +15,9 @@ class RevenueController extends Controller
                     ->orderBy('created_at','desc')
                     ->paginate(10);
         $count = $revenues->total();
-        $categories = Category::where('typeCategory', 2)->get(); // NOTE: Nos traemos datos de la tabla categorias
         return view('revenues.index',[
             'table' => $revenues,
-            'count' => $count,
-            'categories' => $categories
+            'count' => $count
         ]);
     }
 

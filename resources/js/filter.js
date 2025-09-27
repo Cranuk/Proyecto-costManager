@@ -4,18 +4,14 @@ document.addEventListener('DOMContentLoaded', function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
-    const url = import.meta.env.VITE_APP_URL;
     let filtroEn = "";
-
-    console.log('URL de la aplicación:', url);
 
     // Abrir modal y cargar selects
     $('#filter-link').on('click', function(e){
         e.preventDefault();
 
         filtroEn = $(this).data('table');
-        let action = url + '/filters/table';
+        let action = '/filters/table';
 
         $('#table').val(filtroEn);
         $('#filter-form').attr('action', action);
@@ -23,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(filtroEn);
 
         $.ajax({
-            url: url + '/filters/date',
+            url: '/filters/date',
             method: 'GET',
             dataType: 'json',
             success: function(response) {
