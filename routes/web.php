@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\FilterController;
+use App\Http\Controllers\RecordController;
 use App\Http\Controllers\RevenueController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,5 +44,13 @@ Route::controller(RevenueController::class)->group(function () {
 });
 
 // NOTE: Rutas para filtros
-Route::get('/filters/date', [FilterController::class, 'date'])->name('obtainDate');
-Route::post('/filters/table', [FilterController::class, 'filter'])->name('filterDate');
+Route::controller(FilterController::class)->group(function () {
+    Route::get('/filters/date', 'date')->name('obtainDate');
+    Route::post('/filters/table','filter')->name('filterDate');
+});
+
+// NOTE: Rutas para historial
+Route::controller(RecordController::class)->group(function () {
+    Route::get('/records/index', 'index')->name('record');
+    Route::get('/records/pdf/{id}', 'generatePdf')->name('generatePdf');
+});

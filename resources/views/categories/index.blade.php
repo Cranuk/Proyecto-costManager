@@ -5,11 +5,8 @@
 @section('content-category')
 <div class="header-option">
     <div class="menu-list">
-        <a href="{{ route('index') }}" title="Volver">
-            <i class='bx bx-arrow-back icon-medium'></i>
-        </a>
         <a href="{{ route('categoryCreate')}}" title="Agregar categoria">
-            <i class='bx bxs-folder-plus icon-medium'></i>
+            <i class='bx bxs-add-to-queue icon-medium'></i>
         </a>
     </div>
 </div>
@@ -37,7 +34,7 @@
                 <td>{{ $category->description }}</td>
                 <td>
                     <div class="tools">
-                        <a href="{{ route('categoryEdit', ['id'=>$category->id]) }}">
+                        <a href="{{ route('categoryEdit', ['id'=>$category->id]) }}" title="Editar categoria">
                             <i class='bx bxs-edit-alt icon-small'></i>
                         </a>
                         <button type="button" class="btn-delete" data-id="{{ $category->id }}" data-table="categories" title="Eliminar categoria">

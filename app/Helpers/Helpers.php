@@ -63,4 +63,10 @@ class Helpers
         $category = Category::find($id);
         return $category->name;
     }
+
+    public static function spanishDate($date)
+    {
+        $date = Carbon::parse($date);
+        return $date->translatedFormat('F Y');
+    }
 }

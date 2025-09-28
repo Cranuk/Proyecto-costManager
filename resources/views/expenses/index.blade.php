@@ -5,9 +5,6 @@
 @section('content-expense')
 <div class="header-option">
     <div class="menu-list">
-        <a href="{{ route('index') }}" title="Volver">
-            <i class='bx bx-arrow-back icon-medium'></i>
-        </a>
         <a href="{{ route('expenseCreate')}}" title="Agregar gastos">
             <i class='bx bxs-cart-add icon-medium'></i>
         </a>
@@ -47,7 +44,7 @@
                 </td>
                 <td>
                     <div class="tools">
-                        <a href="{{ route('expenseEdit', ['id'=>$expense->id]) }}">
+                        <a href="{{ route('expenseEdit', ['id'=>$expense->id]) }}" title="Editar gasto">
                             <i class='bx bxs-edit-alt icon-small'></i>
                         </a>
                         <button type="button" class="btn-delete" data-id="{{ $expense->id }}" data-table="expenses" title="Eliminar gasto">

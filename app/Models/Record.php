@@ -9,4 +9,12 @@ class Record extends Model
 {
     use HasFactory;
     protected $table = 'records';
+
+    protected $fillable = [
+        'details',
+    ];
+
+    protected $casts = [
+        'details' => 'array',
+    ];
 }

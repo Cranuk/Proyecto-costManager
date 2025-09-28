@@ -35,6 +35,9 @@
                 @yield('content-revenue')
                 @yield('content-create-revenue')
 
+                <!--Records-->
+                @yield('content-record')
+
                 <!--Modal-->
                 @include('includes.filter')
             </div>

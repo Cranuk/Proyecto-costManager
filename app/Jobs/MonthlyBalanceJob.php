@@ -12,6 +12,14 @@ class MonthlyBalanceJob
     {
         $lastMonth = now()->subMonth()->startOfMonth(); // NOTE: obtenemos el primer día del mes anterior osea 01/08/2025 por ejemplo
 
+        // Verifico si ya existe un registro para ese mes
+        $exists = Record::where('details->mes', $lastMonth->format('Y-m'))->exists();
+
+        if ($exists) {
+            Log::info("MonthlyBalanceJob: ya existe un registro para {$lastMonth->format('Y-m')}");
+            return;
+        }
+
         $balance = Helpers::getBalance($lastMonth); // NOTE: obtenemos el balance del mes anterior
 
         Record::create([
@@ -23,6 +31,7 @@ class MonthlyBalanceJob
             ],
         ]);
 
+        Log::info("Balance del mes {$lastMonth->format('Y-m')}: " . json_encode($balance));
         Log::info("MonthlyBalanceJob ejecutado para el mes {$lastMonth->format('Y-m')}");
     }
 }

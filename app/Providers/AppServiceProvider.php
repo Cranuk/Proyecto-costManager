@@ -51,5 +51,10 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('nameCategory', function ($id) {
             return "<?php echo \App\Helpers\Helpers::nameCategory($id); ?>";
         });
+
+        // Directiva para fecha en español
+        Blade::directive('spanishDate', function ($date) {
+            return "<?php echo \App\Helpers\Helpers::spanishDate($date); ?>";
+        });
     }
 }

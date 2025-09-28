@@ -5,11 +5,8 @@
 @section('content-revenue')
 <div class="header-option">
     <div class="menu-list">
-        <a href="{{ route('index') }}" title="Volver">
-            <i class='bx bx-arrow-back icon-medium'></i>
-        </a>
         <a href="{{ route('revenueCreate')}}" title="Agregar ingresos">
-            <i class='bx bxs-cart-add icon-medium'></i>
+            <i class='bx bx-money icon-medium'></i>
         </a>
         <a href="#" id="filter-link" data-table="revenues" title="Filtrar ingresos">
             <i class='bx bxs-filter-alt icon-medium'></i>
@@ -48,7 +45,7 @@
                 </td>
                 <td>
                     <div class="tools">
-                        <a href="{{ route('revenueEdit', ['id'=>$revenue->id]) }}">
+                        <a href="{{ route('revenueEdit', ['id'=>$revenue->id]) }}" title="Editar ingreso">
                             <i class='bx bxs-edit-alt icon-small'></i>
                         </a>
                         <button type="button" class="btn-delete" data-id="{{ $revenue->id }}" data-table="revenues" title="Eliminar ingreso">

@@ -13,7 +13,7 @@
             </li>
             <li>
                 <a href="{{ route('expense') }}" title='Gastos'>
-                    <i class='bx bxs-wallet icon-big'></i>
+                    <i class='bx bxs-cart-alt icon-big'></i>
                 </a>
             </li>
             <li>
@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" title='Reportes'>
+                <a href="{{ route('record') }}" title='Historial'>
                     <i class='bx bxs-calendar-alt icon-big'></i>
                 </a>
             </li>
