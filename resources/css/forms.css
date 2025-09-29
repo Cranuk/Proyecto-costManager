@@ -4,11 +4,11 @@
     align-items: center;
     gap: 5px;
     width: 330px;
-    background-color: #faf9f9;
+    background-color: var(--color-white);
     border-radius: 10px;
     padding: 10px 5px;
     margin: 20px 10px;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 
 .label-text {
@@ -19,19 +19,19 @@
     font-size: 1.2rem;
     height: 30px;
     width: 90%;
-    color: #333333;
+    color: var(--color-black-blue);
 }
 
 .input-select {
     font-size: 1.2rem;
     height: 30px;
     width: 90%;
-    color: #333333;
+    color: var(--color-black-blue);
     text-align: center;
 }
 
 .input-textarea {
     font-size: 1.2rem;
     height: 100px;
-    color: #333333;
+    color: var(--color-black-blue);
 }

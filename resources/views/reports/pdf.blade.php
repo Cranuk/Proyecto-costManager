@@ -19,7 +19,7 @@
 
         th {
             font-size: 1rem;
-            color: #e6e6e9;
+            color: #faf9f9;
         }
 
         th,

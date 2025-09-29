@@ -19,7 +19,7 @@ table {
 
 th {
     font-size: 1.3rem;
-    color: #e6e6e9;
+    color: var(--color-white);
 }
 
 th,
@@ -28,16 +28,16 @@ td {
 }
 
 thead tr {
-    background-color: #282C34;
+    background-color: var(--color-black-blue);
     text-align: center;
 }
 
 tbody tr:nth-child(even) {
-    background-color: #c8c9cd;
+    background-color: var(--color-grey-1);
 }
 
 tbody tr:nth-child(odd) {
-    background-color: #e3e3e6;
+    background-color: var(--color-grey-2);
 }
 
 td.title {

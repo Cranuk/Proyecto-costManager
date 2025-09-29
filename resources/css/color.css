@@ -1,0 +1,13 @@
+:root {
+    --color-white: #faf9f9;
+    --color-black-blue: #282C34;
+    --color-grey-1: #c8c9cd;
+    --color-grey-2: #e3e3e6;
+    --color-red: #ef233c;
+    --color-light-blue: #0077b6;
+
+    /*Colores del footer*/
+    --color-text: #f9f7f3;
+    --background-footer: #333333;
+    --color-link: #ffb200;
+}
