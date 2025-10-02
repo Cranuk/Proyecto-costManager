@@ -19,8 +19,5 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withSchedule(function (Schedule $schedule) {
-        $schedule->job(new MonthlyBalanceJob)->monthlyOn(1, '00:00');
-
-        // Para testear cada minuto
-        //$schedule->job(new MonthlyBalanceJob)->everyMinute();
+        $schedule->job(new MonthlyBalanceJob)->daily();
     })->create();

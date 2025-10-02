@@ -10,7 +10,7 @@ class MonthlyBalanceJob
 {
     public function handle()
     {
-        $lastMonth = now()->subMonth()->startOfMonth(); // NOTE: obtenemos el primer día del mes anterior osea 01/08/2025 por ejemplo
+        $lastMonth = now()->subMonth()->startOfMonth();
 
         // Verifico si ya existe un registro para ese mes
         $exists = Record::where('details->mes', $lastMonth->format('Y-m'))->exists();
