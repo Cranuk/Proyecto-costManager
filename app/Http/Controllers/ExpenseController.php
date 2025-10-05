@@ -13,13 +13,16 @@ class ExpenseController extends Controller
 
     public function index(){
         $month = Carbon::now()->month;
+        $year = Carbon::now()->year;
         $expenses = Expense::whereMonth('created_at','=',$month)
+                    ->whereYear('created_at','=',$year)
                     ->orderBy('created_at','desc')
                     ->paginate(10);
         $count = $expenses->total();
+
         return view('expenses.index',[
             'table' => $expenses,
-            'count' => $count
+            'count' => $count,
         ]);
     }
 

@@ -69,4 +69,23 @@ class Helpers
         $date = Carbon::parse($date);
         return $date->translatedFormat('F Y');
     }
+
+    public static function chartExpense(){
+        $month = Carbon::now()->month;
+        $year = Carbon::now()->year;
+
+        $expenseCategory = Category::withSum(['expenses' => function($query) use ($month, $year) {
+                $query->whereMonth('created_at', $month)
+                    ->whereYear('created_at', $year);
+            }], 'amount')
+            ->get();
+
+        $categories = $expenseCategory->pluck('name');
+        $total = $expenseCategory->pluck('expenses_sum_amount');
+
+        return [
+            'categories' => $categories,
+            'total' => $total
+        ];
+    }
 }

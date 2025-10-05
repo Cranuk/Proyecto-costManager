@@ -14,8 +14,10 @@ class Controller extends BaseController
     public function index()
     {
         $balances = Helpers::getBalance();
+        $chartExpenses = Helpers::chartExpense();
         return view('main', [
-            'balances' => $balances
+            'balances' => $balances,
+            'chartExpenses' => $chartExpenses
         ]);
     }
 }

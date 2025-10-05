@@ -18,6 +18,8 @@
     </div>
 </div>
 
+@include('chart.chartExpense')
+
 @else
 <div class="alert-box">
     <div class="alert alert-notice">

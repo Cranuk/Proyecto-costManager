@@ -9,9 +9,13 @@ use Illuminate\Http\Request;
 
 class RevenueController extends Controller
 {
+    // NOTE: funciones para ingresos
+    
     public function index(){
         $month = Carbon::now()->month;
+        $year = Carbon::now()->year;
         $revenues = Revenue::whereMonth('created_at','=',$month)
+                    ->whereYear('created_at','=',$year)
                     ->orderBy('created_at','desc')
                     ->paginate(10);
         $count = $revenues->total();

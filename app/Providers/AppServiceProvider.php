@@ -56,5 +56,10 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('spanishDate', function ($date) {
             return "<?php echo \App\Helpers\Helpers::spanishDate($date); ?>";
         });
+
+        // Directiva para tener informacion para el grafico
+        Blade::directive('dataChart', function () {
+            return "<?php echo \App\Helpers\Helpers::dataChart(); ?>";
+        });
     }
 }
