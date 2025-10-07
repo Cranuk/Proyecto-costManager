@@ -36,6 +36,9 @@ $route = isset($edit) ? 'categoryUpdate' : 'categorySave';
     <label for="name" class="label-text">Nombre:</label>
     <input type="text" name="name" class="input-text" value="{{ $edit->name ?? '' }}">
 
+    <label for="color" class="label-text">Color:</label>
+    <input type="color" name="color" class="input-text" value="{{ $edit->color ?? '#000000' }}">
+
     <label for="description" class="label-text">Descripcion:</label>
     <textarea name="description" class="input-textarea" cols="29" rows="5">{{ $edit->description ?? '' }}</textarea>
 

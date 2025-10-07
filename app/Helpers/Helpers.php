@@ -78,13 +78,20 @@ class Helpers
                 $query->whereMonth('created_at', $month)
                     ->whereYear('created_at', $year);
             }], 'amount')
+            ->where('typeCategory', 1)
             ->get();
 
         $categories = $expenseCategory->pluck('name');
         $total = $expenseCategory->pluck('expenses_sum_amount');
+        
+        // Si no tiene color, asigna gris
+        $color = $expenseCategory->map(function($cat) {
+            return $cat->color ?? '#999999';
+        });
 
         return [
             'categories' => $categories,
+            'color' => $color,
             'total' => $total
         ];
     }

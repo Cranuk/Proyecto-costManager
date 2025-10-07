@@ -14,7 +14,8 @@ class Category extends Model
     protected $fillable = [
         'name',
         'description',
-        'typeCategory' // 1 = gasto, 2 = ingreso
+        'typeCategory', // 1 = gasto, 2 = ingreso
+        'color'
     ];
 
     public function expenses(){

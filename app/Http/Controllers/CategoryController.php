@@ -50,12 +50,14 @@ class CategoryController extends Controller
             $name = $request -> input('name');
             $description = $request -> input('description');
             $typeCategory = $request -> input('typeCategory');
+            $color = $request -> input('color');
 
             $category = Category::find($id);
-            $category::update([
+            $category->update([
                 'name' => $name,
                 'description' => $description,
-                'typeCategory' => $typeCategory
+                'typeCategory' => $typeCategory,
+                'color' => $color
             ]);
             return redirect()->route('category')
                             ->with('status', 'Operación realizada con éxito.');
@@ -70,7 +72,8 @@ class CategoryController extends Controller
             Category::create([
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
-                'typeCategory' => $request->input('typeCategory')
+                'typeCategory' => $request->input('typeCategory'),
+                'color' => $request->input('color')
             ]);
             return redirect()->route('category')
                             ->with('status', 'Operación realizada con éxito.');

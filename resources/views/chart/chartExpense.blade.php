@@ -1,10 +1,14 @@
 @php
 $chartData = \App\Helpers\Helpers::chartExpense();
 $labels = $chartData['categories'];
+$color = $chartData['color'];
 $totales = $chartData['total'];
 @endphp
 
-<canvas id="balanceChart"></canvas>
+<div style="width: 400px; height: 250px; margin: auto;">
+    <canvas id="balanceChart" width="400" height="250"></canvas>
+</div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const ctx = document.getElementById('balanceChart');
@@ -16,8 +20,8 @@ $totales = $chartData['total'];
                 , datasets: [{
                     label: 'Monto gastado ($)'
                     , data: @json($totales)
-                    , backgroundColor: 'rgba(54, 162, 235, 0.6)'
-                    , borderColor: 'rgba(54, 162, 235, 1)'
+                    , backgroundColor: @json($color)
+                    , borderColor: 'rgba(40, 44, 52, 1)'
                     , borderWidth: 1
                 }]
             }

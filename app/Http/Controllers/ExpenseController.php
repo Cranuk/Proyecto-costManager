@@ -83,11 +83,14 @@ class ExpenseController extends Controller
             $description = $request -> input('description');
             $amount = $request -> input('amount');
             $category = $request -> input('category');
+            $date = $request -> input('date');
+            $fullDate = Carbon::parse($date)->setTimeFrom(Carbon::now());
 
             Expense::create([
                 'category_id' => $category,
                 'description' => $description,
-                'amount' => $amount
+                'amount' => $amount,
+                'created_at' => $fullDate,
             ]);
             return redirect()->route('expense')
                             ->with('status', 'Operación realizada con éxito.');
