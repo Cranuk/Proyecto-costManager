@@ -8,9 +8,9 @@ Gestor de gastos personal desarrollado en **Laravel 11**, completamente **docker
 
 - **Backend:** Laravel 11  
 - **Base de datos:** MySQL  
-- **Frontend:** Blade, jQuery  
+- **Frontend:** Blade, jQuery, css
 - **Gestión de dependencias frontend:** pnpm  
-- **Contenedores:** DockerFile(Docker CLI/Docker Desktop)  
+- **Contenedores:** Docker(Docker CLI/Docker Desktop)  
 - **Servidor web:** Apache
 
 ---
@@ -34,6 +34,12 @@ cd costManager
 
 ```
 cp .env.example .env
+```
+
+### Copiar y configurar el archivo para levantar los servicios en docker
+
+```
+cp docker-compose.example.yml docker-compose.yml
 ```
 
 ### Construir y levantar los contenedores
