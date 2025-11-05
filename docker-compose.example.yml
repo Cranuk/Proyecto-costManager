@@ -1,0 +1,36 @@
+services:
+  cost-manager:
+    build:
+      context: ./costManager
+      dockerfile: Dockerfile
+    container_name: cost-manager
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+      - "5173:5173"
+    volumes:
+      - ./costManager:/var/www/html
+    networks:
+      - red_cranuk
+      
+  cost-manager-cron:
+    build:
+        context: ./costManager
+        dockerfile: Dockerfile
+    container_name: cost-manager-cron
+    restart: unless-stopped
+    volumes:
+      - ./costManager:/var/www/html
+    command: >
+      sh -c "apt-get update &&
+        apt-get install -y cron &&
+        mkdir -p /var/www/html/storage/logs &&
+        touch /var/www/html/storage/logs/cron.log &&
+        echo '* * * * * cd /var/www/html && /usr/local/bin/php artisan schedule:run >> /var/www/html/storage/logs/cron.log 2>&1' | crontab - &&
+        cron -f"
+    networks:
+      - red_cranuk
+
+networks:
+  red_cranuk:
+    external: true
