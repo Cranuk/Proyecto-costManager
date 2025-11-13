@@ -82,7 +82,7 @@ class RevenueController extends Controller
             $description = $request -> input('description');
             $amount = $request -> input('amount');
             $category = $request -> input('category');
-            Revenue::insert([
+            Revenue::create([
                         'category_id' => $category,
                         'description' => $description,
                         'amount' => $amount
