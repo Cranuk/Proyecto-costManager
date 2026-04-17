@@ -10,11 +10,9 @@ export default defineConfig({
     ],
     server: {
         host: '0.0.0.0',
-        proxy: {
-            '/filters': 'http://costmanager.test:8082'
-        },
+        port: 5178,
         hmr: {
-            host: 'costmanager.test'
+            host: 'localhost',
         }
     },
 });
