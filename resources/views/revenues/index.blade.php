@@ -6,14 +6,19 @@
 <div class="header-option">
     <div class="menu-list">
         <a href="{{ route('revenueCreate')}}" title="Agregar ingresos">
-            <i class='bx bx-money icon-medium'></i>
+            <span class="material-symbols-outlined icon-medium hover:text-green-600 duration-300">
+                add_box
+            </span>
         </a>
         <a href="#" id="filter-link" data-table="revenues" title="Filtrar ingresos">
-            <i class='bx bxs-filter-alt icon-medium'></i>
+            <span class="material-symbols-outlined icon-medium hover:text-amber-600 duration-300">
+                filter_list
+            </span>
         </a>
     </div>
 </div>
 
+<br>
 
 @if($count > 0)
 <div class="table-responsive">
@@ -46,10 +51,14 @@
                 <td>
                     <div class="tools">
                         <a href="{{ route('revenueEdit', ['id'=>$revenue->id]) }}" title="Editar ingreso">
-                            <i class='bx bxs-edit-alt icon-small'></i>
+                            <span class="material-symbols-outlined icon-medium hover:text-amber-600 duration-300">
+                                edit
+                            </span>
                         </a>
                         <button type="button" class="btn-delete" data-id="{{ $revenue->id }}" data-table="revenues" title="Eliminar ingreso">
-                            <i class='bx bxs-trash icon-small'></i>
+                            <span class="material-symbols-outlined icon-medium hover:text-red-600 duration-300">
+                                delete
+                            </span>
                         </button>
                     </div>
                 </td>
@@ -66,7 +75,9 @@
 @else
 <div class="alert-box">
     <div class="alert alert-notice">
-        <i class='bx bxs-info-square icon-head icon-medium'></i>
+        <span class="material-symbols-outlined icon-head icon-medium">
+            info
+        </span>
         No hay ingresos registrados en este mes!!!
     </div>
 </div>

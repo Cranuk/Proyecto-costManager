@@ -8,60 +8,62 @@ $route = isset($edit) ? 'revenueUpdate' : 'revenueSave';
 @section('title', $title)
 
 @section('content-create-revenue')
+<div class="flex justify-center">
+    <form action="{{ route($route)}}" method="POST" class="form-style">
+        @csrf
 
-<form action="{{ route($route)}}" method="POST" class="form-style">
-    @csrf
+        <div class="space-20"></div>
 
-    <div class="space-20"></div>
+        <div class="subtitle underlined center">
+            @isset($edit)
+            Editar ingreso
+            @else
+            Nuevo ingreso
+            @endisset
+        </div>
 
-    <div class="subtitle underlined center">
+        <div class="space-10"></div>
+
         @isset($edit)
-        Editar ingreso
-        @else
-        Nuevo ingreso
+        <input type="hidden" name="id" value="{{ $edit->id }}">
         @endisset
-    </div>
 
-    <div class="space-10"></div>
+        <label for="category" class="label-text">Categoria:</label>
+        <select name="category" class="input-text">
+            @foreach($categories as $category)
+            @if($category->typeCategory == 2)
+            <!--NOTE: Me trae las categorias asignadas para ingresos-->
+            @if(isset($edit))
+            <option class="input-text" value="{{ $category->id }}" {{ $edit->category_id == $category->id ? 'selected' : '' }}>
+                {{ $category->name }}
+            </option>
+            @else
+            <option class="input-text" value="{{ $category->id }}">
+                {{ $category->name }}
+            </option>
+            @endif
+            @endif
+            @endforeach
+        </select>
 
-    @isset($edit)
-    <input type="hidden" name="id" value="{{ $edit->id }}">
-    @endisset
+        <label for="date" class="label-text">Fecha de gasto:</label>
+        <input type="date" name="date" class="input-text">
 
-    <label for="category" class="label-text">Categoria:</label>
-    <select name="category" class="input-text">
-        @foreach($categories as $category)
-        @if($category->typeCategory == 2)
-        <!--NOTE: Me trae las categorias asignadas para ingresos-->
-        @if(isset($edit))
-        <option class="input-text" value="{{ $category->id }}" {{ $edit->category_id == $category->id ? 'selected' : '' }}>
-            {{ $category->name }}
-        </option>
-        @else
-        <option class="input-text" value="{{ $category->id }}">
-            {{ $category->name }}
-        </option>
-        @endif
-        @endif
-        @endforeach
-    </select>
+        <label for="amount" class="label-text">Cantidad:</label>
+        <input type="number" name="amount" class="input-text" value="{{ $edit->amount ?? '' }}">
 
-    <label for="date">Fecha de gasto:</label>
-    <input type="date" name="date" class="input-text">
+        <label for="description" class="label-text">Descripcion:</label>
+        <textarea name="description" class="input-textarea" cols="29" rows="5">{{ $edit->description ?? '' }}</textarea>
 
-    <label for="description" class="label-text">Descripcion:</label>
-    <textarea name="description" class="input-textarea" cols="29" rows="5">{{ $edit->description ?? '' }}</textarea>
+        <div class="button-box">
+            <a href="{{ route('revenue') }}" title="Volver">
+                <span class="material-symbols-outlined icon-medium hover:text-red-600 duration-300">cancel</span>
+            </a>
+            <button type="submit">
+                <span class="material-symbols-outlined icon-medium hover:text-green-600 duration-300">check_circle</span>
+            </button>
+        </div>
+    </form>
+</div>
 
-    <label for="amount" class="label-text">Cantidad:</label>
-    <input type="number" name="amount" class="input-text" value="{{ $edit->amount ?? '' }}">
-
-    <div class="button-box">
-        <a href="{{ route('revenue') }}" title="Volver">
-            <i class='bx bx-arrow-back icon-medium'></i>
-        </a>
-        <button type="submit">
-            <i class='bx bxs-save icon-medium'></i>
-        </button>
-    </div>
-</form>
 @endsection

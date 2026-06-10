@@ -6,14 +6,16 @@
 <div class="header-option">
     <div class="menu-list">
         <a href="{{ route('expenseCreate')}}" title="Agregar gastos">
-            <i class='bx bxs-cart-add icon-medium'></i>
+            <span class="material-symbols-outlined icon-medium hover:text-green-600 duration-300">add_box</span>
         </a>
         <a href="#" id="filter-link" data-table="expenses" title="Filtrar gastos">
-            <i class='bx bxs-filter-alt icon-medium'></i>
+            <span class="material-symbols-outlined icon-medium hover:text-amber-600 duration-300">filter_list</span>
         </a>
     </div>
 </div>
+
 <br>
+
 @if($count > 0)
 <div class="table-responsive">
     <table>
@@ -63,9 +65,11 @@
 </div>
 
 @else
-<div class=" alert-box">
+<div class="alert-box">
     <div class="alert alert-notice">
-        <i class='bx bxs-info-square icon-head icon-medium'></i>
+        <span class="material-symbols-outlined icon-head icon-medium">
+            info
+        </span>
         No hay gastos registrados en este mes!!!
     </div>
 </div>

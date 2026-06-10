@@ -1,2 +1,2 @@
 bash:
-	docker exec -it cost-manager bash
+	docker exec -u 1000 -it cost-manager bash

@@ -4,11 +4,9 @@
 
 @section('content-category')
 <div class="header-option">
-    <div class="menu-list">
-        <a href="{{ route('categoryCreate')}}" title="Agregar categoria">
-            <i class='bx bxs-add-to-queue icon-medium'></i>
-        </a>
-    </div>
+    <a href="{{ route('categoryCreate')}}" title="Agregar categoria">
+        <span class="material-symbols-outlined icon-medium hover:text-green-600 duration-300">add_box</span>
+    </a>
 </div>
 
 @if( $count > 0)
@@ -35,10 +33,10 @@
                 <td>
                     <div class="tools">
                         <a href="{{ route('categoryEdit', ['id'=>$category->id]) }}" title="Editar categoria">
-                            <i class='bx bxs-edit-alt icon-small'></i>
+                            <span class="material-symbols-outlined icon-small hover:text-amber-600 duration-300">edit</span>
                         </a>
                         <button type="button" class="btn-delete" data-id="{{ $category->id }}" data-table="categories" title="Eliminar categoria">
-                            <i class='bx bxs-trash icon-small'></i>
+                            <span class="material-symbols-outlined icon-small hover:text-red-600 duration-300">delete</span>
                         </button>
                     </div>
                 </td>
@@ -55,7 +53,9 @@
 @else
 <div class="alert-box">
     <div class="alert alert-notice">
-        <i class='bx bxs-info-square icon-head icon-medium'></i>
+        <span class="material-symbols-outlined icon-head icon-medium">
+            info
+        </span>
         No hay categorias registradas!!!
     </div>
 </div>

@@ -2,17 +2,12 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    color: var(--color-black-blue);
-    font-family: "Poppins", sans-serif;
     font-size: 14px;
 }
 
 body {
     background-color: var(--color-white);
-}
-
-main {
-    min-height: 80vh;
+    color: var(--color-black);
 }
 
 a {
@@ -110,35 +105,21 @@ ul {
 .header-option {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    justify-content: center;
     gap: 10px;
 }
 
 .alert-box {
     display: flex;
     justify-content: center;
-    align-items: end;
-    height: 20vh;
 }
 
 .alert {
-    width: fit-content;
+    width: 20%;
+    text-align: center;
     padding: 15px;
     border-radius: 5px;
-    background-color: var(--color-white);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-}
-
-.alert-notice {
-    background-color: var(--color-white);
-}
-
-.categorie-expenses {
-    color: var(--color-red);
-}
-
-.categorie-revenues {
-    color: var(--color-light-blue);
+    box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.4);
 }
 
 .categorie-expenses,
@@ -159,10 +140,28 @@ ul {
     flex-direction: row;
     gap: 10px;
     justify-content: center;
+    padding: 10px;
 }
 
 .pagination .page-item .page-link {
     font-size: 1.3rem;
     font-weight: 600;
-    color: var(--color-black-blue);
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    cursor: default;
+}
+
+.pagination .page-item.disabled .page-link {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination .page-item:not(.active):not(.disabled) .page-link:hover {
+    background-color: var(--color-gray-1);
+    color: var(--color-black);
 }

@@ -7,31 +7,29 @@
     background-color: var(--color-white);
     border-radius: 10px;
     padding: 10px 5px;
-    margin: 20px 10px;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.4);
 }
 
-.label-text {
-    font-size: 1.2rem;
-}
-
-.input-text {
-    font-size: 1.2rem;
-    height: 30px;
-    width: 90%;
-    color: var(--color-black-blue);
-}
-
-.input-select {
-    font-size: 1.2rem;
-    height: 30px;
-    width: 90%;
-    color: var(--color-black-blue);
-    text-align: center;
-}
-
+.label-text,
+.input-text,
+.input-select,
 .input-textarea {
+    width: 90%;
+    height: 35px;
     font-size: 1.2rem;
-    height: 100px;
-    color: var(--color-black-blue);
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"] {
+    border: 1px solid var(--color-gray-2);
+}
+
+textarea.input-textarea {
+    border: 1px solid var(--color-gray-2);
+    height: auto;
+}
+
+select {
+    border: 1px solid var(--color-gray-2);
 }

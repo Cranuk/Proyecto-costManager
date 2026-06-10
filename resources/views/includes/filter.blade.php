@@ -24,10 +24,10 @@
 
             <div class="button-box">
                 <button type="button" class="cancel">
-                    <i class='bx bxs-x-circle icon-medium'></i>
+                    <span class="material-symbols-outlined icon-medium hover:text-red-600 duration-300">cancel</span>
                 </button>
                 <button type="submit">
-                    <i class='bx bxs-check-circle icon-medium'></i>
+                    <span class="material-symbols-outlined icon-medium hover:text-green-600 duration-300">check_circle</span>
                 </button>
             </div>
         </form>

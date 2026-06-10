@@ -1,6 +1,5 @@
 /* ANCHOR: mis archivos css */
 @import './global.css';
-@import './footer.css';
 @import './forms.css';
 @import './menu.css';
 @import './modal.css';
@@ -8,3 +7,8 @@
 @import './balances.css';
 @import './mediaqueries.css';
 @import './color.css';
+
+/* ANCHOR: archivos tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -2,16 +2,6 @@
     * {
         font-size: 14px
     }
-
-    .container-footer>.footer-copyright {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .footer-no-display {
-        display: none;
-    }
-
 }
 
 @media (max-width: 420px) {

@@ -28,16 +28,16 @@ td {
 }
 
 thead tr {
-    background-color: var(--color-black-blue);
+    background-color: var(--color-gray-0);
     text-align: center;
 }
 
 tbody tr:nth-child(even) {
-    background-color: var(--color-grey-1);
+    background-color: var(--color-gray-1);
 }
 
 tbody tr:nth-child(odd) {
-    background-color: var(--color-grey-2);
+    background-color: var(--color-gray-2);
 }
 
 td.title {

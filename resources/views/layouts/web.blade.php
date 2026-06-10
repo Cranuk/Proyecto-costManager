@@ -1,48 +1,58 @@
 <!-- NOTE: Plantilla predeterminada sobre el diseño de la web-->
 <!-- NOTE: layouts.web-->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <link rel="icon" href="{{ asset('costManager.png')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL'0, 'wght'400, 'GRAD'0, 'opsz'24;
+        }
+
+    </style>
+
     <title>CostManager - @yield('title')</title>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @include('includes.alerts')
 </head>
-<body>
-    @include('includes.header')
+<body class="flex flex-col min-h-full">
+    <!--Modales-->
+    @include('includes.filter')
     @include('includes.delete')
-    <main>
-        <div class="container">
-            <div class="container-content">
-                <!--Balances-->
-                @yield('content-main')
-                <!--Categories-->
-                @yield('content-category')
-                @yield('content-create-category')
 
-                <!--Expenses-->
-                @yield('content-expense')
-                @yield('content-create-expense')
+    <x-header />
 
-                <!--Revenues-->
-                @yield('content-revenue')
-                @yield('content-create-revenue')
+    <main class="flex-grow p-6">
+        <!--Balances-->
+        @yield('content-main')
+        <!--Categories-->
+        @yield('content-category')
+        @yield('content-create-category')
 
-                <!--Records-->
-                @yield('content-record')
+        <!--Expenses-->
+        @yield('content-expense')
+        @yield('content-create-expense')
 
-                <!--Modal-->
-                @include('includes.filter')
-            </div>
-        </div>
+        <!--Revenues-->
+        @yield('content-revenue')
+        @yield('content-create-revenue')
+
+        <!--Records-->
+        @yield('content-record')
     </main>
-    @include('includes.footer')
+
+    <x-footer />
 </body>
 </html>

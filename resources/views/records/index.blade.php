@@ -30,7 +30,9 @@
                 <td>
                     <div class="tools">
                         <a href="{{ route('generatePdf', ['id'=>$record->id]) }}" title="Generar PDF" target="_blank">
-                            <i class='bx bxs-file-pdf icon-medium'></i>
+                            <span class="material-symbols-outlined icon-medium hover:text-orange-600 duration-300">
+                                picture_as_pdf
+                            </span>
                         </a>
                     </div>
                 </td>

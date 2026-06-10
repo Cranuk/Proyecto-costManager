@@ -13,11 +13,3 @@
     justify-content: center;
     gap: 20px;
 }
-
-.menu-list a:hover,
-.menu-list a i:hover,
-.menu-list li a:hover,
-.menu-list li a i:hover {
-    color: var(--color-light-blue);
-    transition: all 0.3s ease;
-}
