@@ -66,7 +66,7 @@
 
 @else
 <div class="alert-box">
-    <div class="alert alert-notice">
+    <div class="alert">
         <span class="material-symbols-outlined icon-head icon-medium">
             info
         </span>

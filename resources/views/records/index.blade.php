@@ -48,7 +48,7 @@
 
 @else
 <div class="alert-box">
-    <div class="alert alert-notice">
+    <div class="alert">
         <i class='bx bxs-info-square icon-head icon-medium'></i>
         Sin historial!!!
     </div>

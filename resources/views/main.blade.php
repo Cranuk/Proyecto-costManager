@@ -22,8 +22,10 @@
 
 @else
 <div class="alert-box">
-    <div class="alert alert-notice">
-        <i class='bx bxs-info-square icon-head icon-medium'></i>
+    <div class="alert">
+        <span class="material-symbols-outlined icon-head icon-medium">
+            info
+        </span>
         No hay balance en este mes!!!
     </div>
 </div>
