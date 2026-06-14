@@ -5,8 +5,8 @@
     width: 330px;
     background-color: var(--color-white);
     border-radius: 10px;
-    padding: 40px 5px;
-    margin: 20px 10px;
+    padding: 20px 5px;
+    margin: 20px 5px;
     box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.4);
 }
 
@@ -19,13 +19,13 @@
 
 .balances-label p,
 .balances-number p {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 .balances-total {
     font-weight: bold;
     display: flex;
     flex-direction: column;
-    height: 45px;
+    height: 50px;
     justify-content: flex-end;
 }

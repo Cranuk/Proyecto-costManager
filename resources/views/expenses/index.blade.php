@@ -47,10 +47,10 @@
                 <td>
                     <div class="tools">
                         <a href="{{ route('expenseEdit', ['id'=>$expense->id]) }}" title="Editar gasto">
-                            <i class='bx bxs-edit-alt icon-small'></i>
+                            <span class="material-symbols-outlined icon-small hover:text-amber-600 duration-300">edit</span>
                         </a>
                         <button type="button" class="btn-delete" data-id="{{ $expense->id }}" data-table="expenses" title="Eliminar gasto">
-                            <i class='bx bxs-trash icon-small'></i>
+                            <span class="material-symbols-outlined icon-small hover:text-red-600 duration-300">delete</span>
                         </button>
                     </div>
                 </td>

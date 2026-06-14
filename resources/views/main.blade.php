@@ -4,19 +4,22 @@
 
 @section('content-main')
 @if($balances['balancePositive'])
-<div class="container-balances">
-    <div class="balances-label">
-        <p>Ingresos</p>
-        <p>Gastos</p>
-        <p class="balances-total">Disponible</p>
-    </div>
-    <div class="balances-number">
-        <p>@formatCurrency($balances['balancePositive'])</p>
-        <p>@formatCurrency($balances['balanceNegative'])</p>
-        <hr>
-        <p>@formatCurrency($balances['balanceTotal'])</p>
+<div class="flex justify-center">
+    <div class="container-balances">
+        <div class="balances-label">
+            <p>Ingresos</p>
+            <p>Gastos</p>
+            <p class="balances-total">Disponible</p>
+        </div>
+        <div class="balances-number">
+            <p>@formatCurrency($balances['balancePositive'])</p>
+            <p>@formatCurrency($balances['balanceNegative'])</p>
+            <hr>
+            <p>@formatCurrency($balances['balanceTotal'])</p>
+        </div>
     </div>
 </div>
+
 
 @include('chart.chartExpense')
 

@@ -5,8 +5,10 @@ $color = $chartData['color'];
 $totales = $chartData['total'];
 @endphp
 
-<div style="width: 400px; height: 250px; margin: auto;">
-    <canvas id="balanceChart" width="400" height="250"></canvas>
+<div class="flex justify-center">
+    <div class="w-[500px] h-[300px] bg-white m-2" style="box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.4);">
+        <canvas id="balanceChart" width="400" height="250"></canvas>
+    </div>
 </div>
 
 <script>
