@@ -3,27 +3,27 @@
         <ul class="menu-list">
             <li>
                 <a href="{{ route('index') }}" title='Inicio'>
-                    <span class="material-symbols-outlined icon-big hover:text-amber-600 duration-300">home</span>
+                    <span class="material-symbols-outlined icon-big hover:text-amber-600 duration-300 {{ request()->routeIs('index') ? 'underline underline-offset-4 decoration-4 cursor-not-allowed' : '' }}">home</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('category') }}" title="Categorias">
-                    <span class="material-symbols-outlined icon-big hover:text-amber-600 duration-300">category</span>
+                <a href="{{ route('categories.index') }}" title="Categorias">
+                    <span class="material-symbols-outlined icon-big hover:text-amber-600 duration-300 {{ request()->routeIs('categories.index', 'categories.*') ? 'underline underline-offset-4 decoration-4 cursor-not-allowed' : '' }}">category</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('expense') }}" title='Gastos'>
-                    <span class="material-symbols-outlined icon-big hover:text-amber-600 duration-300">shopping_cart</span>
+                <a href="{{ route('expenses.index') }}" title='Gastos'>
+                    <span class="material-symbols-outlined icon-big hover:text-amber-600 duration-300 {{ request()->routeIs('expenses.index', 'expenses.*') ? 'underline underline-offset-4 decoration-4 cursor-not-allowed' : '' }}">shopping_cart</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('revenue') }}" title='Ingresos'>
-                    <span class="material-symbols-outlined icon-big hover:text-amber-600 duration-300">account_balance</span>
+                <a href="{{ route('revenues.index') }}" title='Ingresos'>
+                    <span class="material-symbols-outlined icon-big hover:text-amber-600 duration-300 {{ request()->routeIs('revenues.index', 'revenues.*') ? 'underline underline-offset-4 decoration-4 cursor-not-allowed' : '' }}">account_balance</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('record') }}" title='Historial'>
-                    <span class="material-symbols-outlined icon-big hover:text-amber-600 duration-300">calendar_today</span>
+                <a href="{{ route('records') }}" title='Historial'>
+                    <span class="material-symbols-outlined icon-big hover:text-amber-600 duration-300 {{ request()->routeIs('records') ? 'underline underline-offset-4 decoration-4 cursor-not-allowed' : '' }}">calendar_today</span>
                 </a>
             </li>
         </ul>

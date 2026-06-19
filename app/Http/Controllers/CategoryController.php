@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -13,7 +11,7 @@ class CategoryController extends Controller
     public function index(){
         $categories = Category::orderBy('typeCategory','desc')
                                 ->orderBy('name','asc')
-                                ->paginate(10);
+                                ->paginate(5);
         $count = $categories->total();
         return view('categories.index',[
             'table' => $categories,
@@ -29,10 +27,10 @@ class CategoryController extends Controller
         try {
             $category = Category::find($id);
             $category->delete();
-            return redirect()->route('category')
+            return redirect()->route('categories.index')
                             ->with('status', 'Se elimino correctamente');
         } catch (\Exception $e) {
-            return redirect()->route('category')
+            return redirect()->route('categories.index')
                             ->with('error', 'Hubo un problema con la operación: ' . $e->getMessage());
         }
     }
@@ -59,10 +57,10 @@ class CategoryController extends Controller
                 'typeCategory' => $typeCategory,
                 'color' => $color
             ]);
-            return redirect()->route('category')
+            return redirect()->route('categories.index')
                             ->with('status', 'Operación realizada con éxito.');
         } catch (\Exception $e) {
-            return redirect()->route('category')
+            return redirect()->route('categories.index')
                             ->with('error', 'Hubo un problema con la operación: ' . $e->getMessage());
         }
     }
@@ -75,10 +73,10 @@ class CategoryController extends Controller
                 'typeCategory' => $request->input('typeCategory'),
                 'color' => $request->input('color')
             ]);
-            return redirect()->route('category')
+            return redirect()->route('categories.index')
                             ->with('status', 'Operación realizada con éxito.');
         } catch (\Exception $e) {
-            return redirect()->route('category')
+            return redirect()->route('categories.index')
                             ->with('error', 'Hubo un problema con la operación: ' . $e->getMessage());
         }
     }

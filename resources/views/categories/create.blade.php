@@ -2,7 +2,7 @@
 
 @php
 $title = isset($edit) ? 'Editar Categoria' : 'Nueva Categoria';
-$route = isset($edit) ? 'categoryUpdate' : 'categorySave';
+$route = isset($edit) ? 'categories.update' : 'categories.save';
 @endphp
 
 @section('title', $title)
@@ -46,7 +46,7 @@ $route = isset($edit) ? 'categoryUpdate' : 'categorySave';
         <div class="space-10"></div>
 
         <div class="button-box">
-            <a href="{{ route('category') }}" title="Volver">
+            <a href="{{ route('categories.index') }}" title="Volver">
                 <span class="material-symbols-outlined icon-medium hover:text-red-600 duration-300">
                     cancel
                 </span>

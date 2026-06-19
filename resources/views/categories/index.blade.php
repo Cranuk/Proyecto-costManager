@@ -4,7 +4,7 @@
 
 @section('content-category')
 <div class="header-option">
-    <a href="{{ route('categoryCreate')}}" title="Agregar categoria">
+    <a href="{{ route('categories.create')}}" title="Agregar categoria">
         <span class="material-symbols-outlined icon-medium hover:text-green-600 duration-300">add_box</span>
     </a>
 </div>
@@ -32,7 +32,7 @@
                 <td>{{ $category->description }}</td>
                 <td>
                     <div class="tools">
-                        <a href="{{ route('categoryEdit', ['id'=>$category->id]) }}" title="Editar categoria">
+                        <a href="{{ route('categories.edit', ['id'=>$category->id]) }}" title="Editar categoria">
                             <span class="material-symbols-outlined icon-small hover:text-amber-600 duration-300">edit</span>
                         </a>
                         <button type="button" class="btn-delete" data-id="{{ $category->id }}" data-table="categories" title="Eliminar categoria">

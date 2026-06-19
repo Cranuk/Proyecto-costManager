@@ -6,10 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Reporte del mes - CostManager</title>
     <style>
-        body {
-            font-family: sans-serif;
-        }
-
         table {
             width: 100%;
             border-collapse: collapse;

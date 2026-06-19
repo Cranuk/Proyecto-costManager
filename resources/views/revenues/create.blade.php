@@ -2,7 +2,7 @@
 
 @php
 $title = isset($edit) ? 'Editar Gasto' : 'Nuevo gasto';
-$route = isset($edit) ? 'revenueUpdate' : 'revenueSave';
+$route = isset($edit) ? 'revenues.update' : 'revenues.save';
 @endphp
 
 @section('title', $title)
@@ -56,7 +56,7 @@ $route = isset($edit) ? 'revenueUpdate' : 'revenueSave';
         <textarea name="description" class="input-textarea" cols="29" rows="5">{{ $edit->description ?? '' }}</textarea>
 
         <div class="button-box">
-            <a href="{{ route('revenue') }}" title="Volver">
+            <a href="{{ route('revenues.index') }}" title="Volver">
                 <span class="material-symbols-outlined icon-medium hover:text-red-600 duration-300">cancel</span>
             </a>
             <button type="submit">

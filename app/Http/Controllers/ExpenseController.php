@@ -17,7 +17,7 @@ class ExpenseController extends Controller
         $expenses = Expense::whereMonth('created_at','=',$month)
                     ->whereYear('created_at','=',$year)
                     ->orderBy('created_at','desc')
-                    ->paginate(10);
+                    ->paginate(5);
         $count = $expenses->total();
 
         return view('expenses.index',[
@@ -37,10 +37,10 @@ class ExpenseController extends Controller
         try {
             $expense = Expense::find($id);
             $expense->delete();
-            return redirect()->route('expense')
+            return redirect()->route('expenses.index')
                             ->with('status', 'Se elimino correctamente');
         } catch (\Exception $e) {
-            return redirect()->route('expense')
+            return redirect()->route('expenses.index')
                             ->with('error', 'Hubo un problema con la operación: ' . $e->getMessage());
         }
     }
@@ -70,10 +70,10 @@ class ExpenseController extends Controller
                 'amount' => $amount,
                 'created_at' => $fullDate,
             ]);
-            return redirect()->route('expense')
+            return redirect()->route('expenses.index')
                             ->with('status', 'Operación realizada con éxito.');
         } catch (\Exception $e) {
-            return redirect()->route('expense')
+            return redirect()->route('expenses.index')
                             ->with('error', 'Hubo un problema con la operación: ' . $e->getMessage());
         }
     }
@@ -92,10 +92,10 @@ class ExpenseController extends Controller
                 'amount' => $amount,
                 'created_at' => $fullDate,
             ]);
-            return redirect()->route('expense')
+            return redirect()->route('expenses.index')
                             ->with('status', 'Operación realizada con éxito.');
         } catch (\Exception $e) {
-            return redirect()->route('expense')
+            return redirect()->route('expenses.index')
                             ->with('error', 'Hubo un problema con la operación: ' . $e->getMessage());
         }
     }

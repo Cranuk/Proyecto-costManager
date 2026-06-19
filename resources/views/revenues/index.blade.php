@@ -5,7 +5,7 @@
 @section('content-revenue')
 <div class="header-option">
     <div class="menu-list">
-        <a href="{{ route('revenueCreate')}}" title="Agregar ingresos">
+        <a href="{{ route('revenues.create')}}" title="Agregar ingresos">
             <span class="material-symbols-outlined icon-medium hover:text-green-600 duration-300">
                 add_box
             </span>
@@ -50,13 +50,13 @@
                 </td>
                 <td>
                     <div class="tools">
-                        <a href="{{ route('revenueEdit', ['id'=>$revenue->id]) }}" title="Editar ingreso">
-                            <span class="material-symbols-outlined icon-medium hover:text-amber-600 duration-300">
+                        <a href="{{ route('revenues.edit', ['id'=>$revenue->id]) }}" title="Editar ingreso">
+                            <span class="material-symbols-outlined icon-small hover:text-amber-600 duration-300">
                                 edit
                             </span>
                         </a>
                         <button type="button" class="btn-delete" data-id="{{ $revenue->id }}" data-table="revenues" title="Eliminar ingreso">
-                            <span class="material-symbols-outlined icon-medium hover:text-red-600 duration-300">
+                            <span class="material-symbols-outlined icon-small hover:text-red-600 duration-300">
                                 delete
                             </span>
                         </button>

@@ -5,7 +5,7 @@
 @section('content-expense')
 <div class="header-option">
     <div class="menu-list">
-        <a href="{{ route('expenseCreate')}}" title="Agregar gastos">
+        <a href="{{ route('expenses.create')}}" title="Agregar gastos">
             <span class="material-symbols-outlined icon-medium hover:text-green-600 duration-300">add_box</span>
         </a>
         <a href="#" id="filter-link" data-table="expenses" title="Filtrar gastos">
@@ -46,7 +46,7 @@
                 </td>
                 <td>
                     <div class="tools">
-                        <a href="{{ route('expenseEdit', ['id'=>$expense->id]) }}" title="Editar gasto">
+                        <a href="{{ route('expenses.edit', ['id'=>$expense->id]) }}" title="Editar gasto">
                             <span class="material-symbols-outlined icon-small hover:text-amber-600 duration-300">edit</span>
                         </a>
                         <button type="button" class="btn-delete" data-id="{{ $expense->id }}" data-table="expenses" title="Eliminar gasto">

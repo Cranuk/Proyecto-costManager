@@ -14,7 +14,7 @@ class RecordController extends Controller
     {
         $count = 1;
         $table = Record::orderBy('created_at', 'desc')
-                ->paginate(10);
+                ->paginate(5);
         return view('records.index', compact('count', 'table'));
     }
 

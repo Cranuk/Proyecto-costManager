@@ -17,7 +17,7 @@ class RevenueController extends Controller
         $revenues = Revenue::whereMonth('created_at','=',$month)
                     ->whereYear('created_at','=',$year)
                     ->orderBy('created_at','desc')
-                    ->paginate(10);
+                    ->paginate(5);
         $count = $revenues->total();
         return view('revenues.index',[
             'table' => $revenues,
@@ -36,10 +36,10 @@ class RevenueController extends Controller
         try {
             $revenue = Revenue::find($id);
             $revenue->delete();
-            return redirect()->route('revenue')
+            return redirect()->route('revenues.index')
                             ->with('status', 'Se elimino correctamente');
         } catch (\Exception $e) {
-            return redirect()->route('revenue')
+            return redirect()->route('revenues.index')
                             ->with('error', 'Hubo un problema con la operación: ' . $e->getMessage());
         }
     }
@@ -69,10 +69,10 @@ class RevenueController extends Controller
                         'amount' => $amount,
                         'created_at' => $fullDate
                     ]);
-            return redirect()->route('revenue')
+            return redirect()->route('revenues.index')
                             ->with('status', 'Operación realizada con éxito.');
         } catch (\Exception $e) {
-            return redirect()->route('revenue')
+            return redirect()->route('revenues.index')
                             ->with('error', 'Hubo un problema con la operación: ' . $e->getMessage());
         }
     }
@@ -87,10 +87,10 @@ class RevenueController extends Controller
                         'description' => $description,
                         'amount' => $amount
                     ]);
-            return redirect()->route('revenue')
+            return redirect()->route('revenues.index')
                             ->with('status', 'Operación realizada con éxito.');
         } catch (\Exception $e) {
-            return redirect()->route('revenue')
+            return redirect()->route('revenues.index')
                             ->with('error', 'Hubo un problema con la operación: ' . $e->getMessage());
         }
     }

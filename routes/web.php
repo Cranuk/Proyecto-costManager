@@ -14,34 +14,43 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [Controller::class, 'index'])->name('index');
 
 // NOTE: Rutas para categorias
-Route::controller(CategoryController::class)->group(function () {
-    Route::get('/categories/index', 'index')->name('category');
-    Route::get('/categories/create', 'create')->name('categoryCreate');
-    Route::get('/categories/edit/{id}', 'edit')->name('categoryEdit');
-    Route::delete('/categories/delete/{id}', 'delete')->name('categoryDelete');
-    Route::post('/categories/update', 'update')->name('categoryUpdate');
-    Route::post('/categories/save', 'save')->name('categorySave');
-});
+Route::prefix('category')
+    ->name('categories.')
+    ->controller(CategoryController::class)
+    ->group(function () {
+        Route::get('index', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::delete('delete/{id}', 'delete')->name('delete');
+        Route::post('save', 'save')->name('save');
+        Route::post('update', 'update')->name('update');
+    });
 
 // NOTE: Rutas para gastos
-Route::controller(ExpenseController::class)->group(function () {
-    Route::get('/expenses/index', 'index')->name('expense');
-    Route::get('/expenses/create', 'create')->name('expenseCreate');
-    Route::get('/expenses/edit/{id}', 'edit')->name('expenseEdit');
-    Route::delete('/expenses/delete/{id}', 'delete')->name('expenseDelete');
-    Route::post('/expenses/update', 'update')->name('expenseUpdate');
-    Route::post('/expenses/save', 'save')->name('expenseSave');
-});
+Route::prefix('expense')
+    ->name('expenses.')
+    ->controller(ExpenseController::class)
+    ->group(function () {
+        Route::get('index', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::delete('delete/{id}', 'delete')->name('delete');
+        Route::post('save', 'save')->name('save');
+        Route::post('update', 'update')->name('update');
+    });
 
 // NOTE: Rutas para ingresos
-Route::controller(RevenueController::class)->group(function () {
-    Route::get('/revenues/index', 'index')->name('revenue');
-    Route::get('/revenues/create', 'create')->name('revenueCreate');
-    Route::get('/revenues/edit/{id}', 'edit')->name('revenueEdit');
-    Route::delete('/revenues/delete/{id}', 'delete')->name('revenueDelete');
-    Route::post('/revenues/update', 'update')->name('revenueUpdate');
-    Route::post('/revenues/save', 'save')->name('revenueSave');
-});
+Route::prefix('revenue')
+    ->name('revenues.')
+    ->controller(RevenueController::class)
+    ->group(function () {
+        Route::get('index', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::delete('delete/{id}', 'delete')->name('delete');
+        Route::post('save', 'save')->name('save');
+        Route::post('update', 'update')->name('update');
+    });
 
 // NOTE: Rutas para filtros
 Route::controller(FilterController::class)->group(function () {
@@ -51,6 +60,6 @@ Route::controller(FilterController::class)->group(function () {
 
 // NOTE: Rutas para historial
 Route::controller(RecordController::class)->group(function () {
-    Route::get('/records/index', 'index')->name('record');
+    Route::get('/records/index', 'index')->name('records');
     Route::get('/records/pdf/{id}', 'generatePdf')->name('generatePdf');
 });

@@ -41,7 +41,7 @@ class FilterController extends Controller
             ->whereMonth('created_at', '=', $month)
             ->whereYear('created_at', '=', $year);
 
-        $records = $query->paginate(10);
+        $records = $query->paginate(5);
         $count = $records->count();
 
         $page = $tableName . '.index';

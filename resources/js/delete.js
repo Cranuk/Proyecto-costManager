@@ -9,12 +9,13 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log("ID a eliminar: " + deleteId);
         console.log("Tabla: " + table);
 
+        // NOTE: aqui debemos usar el prefix de las rutas dado que js no entiende el uso de name de las rutas
         if (table == "expenses") {
-            action = `/expenses/delete/${deleteId}`;
+            action = `/expense/delete/${deleteId}`;
         } else if (table == "categories") {
-            action = `/categories/delete/${deleteId}`;
+            action = `/category/delete/${deleteId}`;
         }else{
-            action = `/revenues/delete/${deleteId}`;
+            action = `/revenue/delete/${deleteId}`;
         }
 
         $('#delete-form').attr('action', action);
