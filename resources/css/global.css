@@ -133,6 +133,14 @@ ul {
     padding: 0px 20px;
 }
 
+.categorie-expenses {
+    color: var(--color-expenses);
+}
+
+.categorie-revenues {
+    color: var(--color-revenues);
+}
+
 .pagination-box nav {
     width: 100%;
     padding: 0px;
