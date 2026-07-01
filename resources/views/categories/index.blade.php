@@ -26,7 +26,7 @@
             @endphp
             <tr>
                 <td class="title">
-                    <i class='bx bxs-purchase-tag-alt icon-medium {{ $color }}'></i>
+                    <span class="material-symbols-outlined icon-medium {{ $color }}">finance_chip</span>
                     {{ $category->name }}
                 </td>
                 <td>{{ $category->description }}</td>
