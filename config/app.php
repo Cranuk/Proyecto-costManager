@@ -123,4 +123,12 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+
+    /*
+    Aqui agrego el token secreto para el endpoint de reportes, que será usado por n8n para invocar el Job de balance mensual.
+    Este token se puede configurar en el archivo .env con la variable TOKEN_SECRET, y si no se encuentra, se usará un valor por defecto
+    */
+
+    'cron_token_n8n' => env('TOKEN_SECRET', 'miTokenSecretoCostManager322366'),
+
 ];
