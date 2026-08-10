@@ -18,7 +18,7 @@
             @foreach($table as $record)
             <tr>
                 <td>
-                    @spanishDate( $record->details['mes'] )
+                    @spanishDate( $record->period )
                 </td>
                 <td>
                     <ul>

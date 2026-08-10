@@ -13,37 +13,32 @@ class RecordController extends Controller
     public function index()
     {
         $count = 1;
-        $table = Record::orderBy('created_at', 'desc')
-                ->paginate(5);
+        $table = Record::orderBy('period', 'desc')
+                ->paginate(10);
         return view('records.index', compact('count', 'table'));
     }
 
-    public function generatePdf($id)
+    public function generatePdf(int $id)
     {
-        // este seria el json que uso para la busqueda {"mes": "2025-08", "balance": 0, "egresos": 0, "ingresos": 0}
-        $record = Record::find($id);
-        $date = Carbon::createFromFormat('Y-m', $record->details['mes']);
-        $month = $date->format('m');
-        $year = $date->format('Y');
+        $record = Record::findOrFail($id);
 
-        $expenses = Expense::whereMonth('created_at', '=', $month)
-                    ->whereYear('created_at', '=', $year)
-                    ->get();
+        $date  = Carbon::createFromFormat('Y-m', $record->period);
+        $start = $date->copy()->startOfMonth();
+        $end   = $date->copy()->endOfMonth();
 
-        $revenues = Revenue::whereMonth('created_at', '=', $month)
-                    ->whereYear('created_at', '=', $year)
-                    ->get();
+        $expenses = Expense::whereBetween('created_at', [$start, $end])->get();
+        $revenues = Revenue::whereBetween('created_at', [$start, $end])->get();
         
         $pdf = Pdf::loadView('reports.pdf', [
-            'title' => 'Reporte mensual de gastos e ingresos:',
-            'record' => $record,
-            'expenses' => $expenses,
-            'revenues' => $revenues,
+            'title'         => 'Reporte mensual de gastos e ingresos:',
+            'record'        => $record,
+            'expenses'      => $expenses,
+            'revenues'      => $revenues,
             'totalRevenues' => $record->details['ingresos'],
             'totalExpenses' => $record->details['egresos'],
-            'balance' => $record->details['balance'],
+            'balance'       => $record->details['balance'],
         ]);
 
-        return $pdf->stream('reports.pdf');
+        return $pdf->stream("reporte-{$record->period}.pdf");
     }
 }

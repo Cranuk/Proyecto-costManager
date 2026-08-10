@@ -27,12 +27,12 @@ class MonthlyBalanceJob
 
         $balance = Helpers::getBalance($lastMonth); // NOTE: obtenemos el balance del mes anterior
 
-        Record::create([
+        $record = Record::create([
             'period' => $period,
             'details' => [
-                'ingresos' => $balance['balancePositive'],
-                'egresos'  => $balance['balanceNegative'],
-                'balance'  => $balance['balanceTotal'],
+                'ingresos' => $balance['balancePositive'] ?? 0,
+                'egresos'  => $balance['balanceNegative'] ?? 0,
+                'balance'  => $balance['balanceTotal'] ?? 0,
             ],
         ]);
 

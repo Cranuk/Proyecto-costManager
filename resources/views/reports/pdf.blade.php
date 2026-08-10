@@ -43,7 +43,7 @@
     </style>
 </head>
 <body>
-    <h2>{{ $title }} @spanishDate( $record->details['mes'] )</h2>
+    <h2>{{ $title }} @spanishDate( $record->period )</h2>
 
     <h3>Ingresos</h3>
     <table>
