@@ -10,28 +10,28 @@ Route::post('/crear-reporte', function () {
     $tokenSecreto = config('app.cron_token_n8n');
 
     if (!$tokenDen8n || $tokenDen8n !== $tokenSecreto) {
-        Log::channel('cron')->warning('Intento de acceso no autorizado al endpoint de reportes desde la IP: ' . Request::ip());
+        Log::channel('cron')->warning('Acceso no autorizado al endpoint desde la IP: ' . Request::ip());
         return response()->json(['error' => 'No autorizado'], 401);
     }
 
-    Log::channel('cron')->info('Endpoint /crear-reporte invocado exitosamente por n8n. Despachando Job...');
+    Log::channel('cron')->info('Realizando reporte mensual');
 
     try {
         dispatch_sync(new MonthlyBalanceJob());
 
+        Log::channel('cron')->info('Reporte mensual generado con éxito');
+
         return response()->json([
             'status' => 'success',
-            'message' => 'Procedimiento ejecutado y procesado con éxito.'
+            'message' => 'Reporte mensual generado con éxito'
         ], 200);
 
     } catch (\Throwable $e) {
-        Log::channel('cron')->error('Fallo crítico en el endpoint /crear-reporte al intentar despachar el Job', [
-            'error' => $e->getMessage()
-        ]);
+        Log::channel('cron')->error('Error al generar el reporte mensual ' . $e->getMessage());
 
         return response()->json([
             'status' => 'error',
-            'message' => 'Hubo un error interno al procesar el balance.',
+            'message' => 'Error al generar el reporte mensual',
             'debug' => $e->getMessage() // Quitar en producción real, dejar solo en local
         ], 500);
     }

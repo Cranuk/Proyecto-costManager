@@ -31,19 +31,19 @@ class Helpers
     public static function getBalanceNegative(?Carbon $date = null)
     {
         $date ??= Carbon::now();
-        $amountNegative = Expense::whereMonth('created_at',$date->month)
-            ->whereYear('created_at', $date->year)
-            ->sum('amount');
-        return $amountNegative;
+        $start = $date->copy()->startOfMonth();
+        $end   = $date->copy()->endOfMonth();
+
+        return Expense::whereBetween('created_at', [$start, $end])->sum('amount');
     }
 
     public static function getBalancePositive(?Carbon $date = null)
     {
         $date ??= Carbon::now();
-        $amountPositive = Revenue::whereMonth('created_at', $date->month)
-            ->whereYear('created_at', $date->year)
-            ->sum('amount');
-        return $amountPositive;
+        $start = $date->copy()->startOfMonth();
+        $end   = $date->copy()->endOfMonth();
+
+        return Revenue::whereBetween('created_at', [$start, $end])->sum('amount');
     }
 
     public static function getBalance(?Carbon $date = null)
@@ -60,8 +60,7 @@ class Helpers
 
     public static function nameCategory($id)
     {
-        $category = Category::find($id);
-        return $category->name;
+        return Category::where('id', $id)->value('name') ?? 'Sin Categoría';
     }
 
     public static function spanishDate($date)
@@ -70,29 +69,22 @@ class Helpers
         return $date->translatedFormat('F Y');
     }
 
-    public static function chartExpense(){
-        $month = Carbon::now()->month;
-        $year = Carbon::now()->year;
+    public static function chartExpense()
+    {
+        $now   = Carbon::now();
+        $start = $now->copy()->startOfMonth();
+        $end   = $now->copy()->endOfMonth();
 
-        $expenseCategory = Category::withSum(['expenses' => function($query) use ($month, $year) {
-                $query->whereMonth('created_at', $month)
-                    ->whereYear('created_at', $year);
+        $expenseCategory = Category::withSum(['expenses' => function($query) use ($start, $end) {
+                $query->whereBetween('created_at', [$start, $end]);
             }], 'amount')
             ->where('typeCategory', 1)
             ->get();
 
-        $categories = $expenseCategory->pluck('name');
-        $total = $expenseCategory->pluck('expenses_sum_amount');
-        
-        // Si no tiene color, asigna gris
-        $color = $expenseCategory->map(function($cat) {
-            return $cat->color ?? '#999999';
-        });
-
         return [
-            'categories' => $categories,
-            'color' => $color,
-            'total' => $total
+            'categories' => $expenseCategory->pluck('name'),
+            'color'      => $expenseCategory->map(fn($cat) => $cat->color ?? '#999999'),
+            'total'      => $expenseCategory->pluck('expenses_sum_amount')
         ];
     }
 }
