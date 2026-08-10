@@ -17,22 +17,24 @@ Route::post('/crear-reporte', function () {
     Log::channel('cron')->info('Realizando reporte mensual');
 
     try {
-        dispatch_sync(new MonthlyBalanceJob());
+        $result = dispatch_sync(new MonthlyBalanceJob());
 
-        Log::channel('cron')->info('Reporte mensual generado con éxito');
+        Log::channel('cron')->info('Proceso de reporte mensual finalizado');
 
         return response()->json([
-            'status' => 'success',
-            'message' => 'Reporte mensual generado con éxito'
+            'status'  => 'success',
+            'created' => $result['created'], // NOTE: true creado, false ya existía
+            'period'  => $result['period'],
+            'data'    => $result['details'],
         ], 200);
 
     } catch (\Throwable $e) {
         Log::channel('cron')->error('Error al generar el reporte mensual ' . $e->getMessage());
 
         return response()->json([
-            'status' => 'error',
+            'status'  => 'error',
             'message' => 'Error al generar el reporte mensual',
-            'debug' => $e->getMessage() // Quitar en producción real, dejar solo en local
+            'debug'   => $e->getMessage()
         ], 500);
     }
 });

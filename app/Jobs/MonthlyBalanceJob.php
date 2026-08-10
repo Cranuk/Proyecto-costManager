@@ -14,11 +14,15 @@ class MonthlyBalanceJob
         $period = $lastMonth->format('Y-m');
 
         // Verifico si ya existe un registro para ese mes
-        $exists = Record::where('period', $period)->exists();
+        $record = Record::where('period', $period)->first();
 
-        if ($exists) {
+        if ($record) {
             Log::info("El Reporte del mes {$period} ya existe.");
-            return;
+            return [
+                'created' => false,
+                'period'  => $period,
+                'details' => $record->details,
+            ];
         }
 
         $balance = Helpers::getBalance($lastMonth); // NOTE: obtenemos el balance del mes anterior
@@ -34,6 +38,12 @@ class MonthlyBalanceJob
 
         Log::info("Balance del mes {$period}: ", $balance);
         Log::info("Reporte mensual generado para el mes {$period}");
+
+        return [
+            'created' => true,
+            'period'  => $period,
+            'details' => $record->details,
+        ];
     }
 }
 
