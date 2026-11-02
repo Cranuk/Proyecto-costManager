@@ -1,8 +1,9 @@
 @php
-$chartData = \App\Helpers\Helpers::chartExpense();
+$chartData = $chartExpenses ?? \App\Helpers\Helpers::chartExpense();
 $labels = $chartData['categories'];
 $color = $chartData['color'];
 $totales = $chartData['total'];
+$mes = $chartData['mes'];
 @endphp
 
 <div class="flex justify-center">
@@ -35,7 +36,7 @@ $totales = $chartData['total'];
                     }
                     , title: {
                         display: true
-                        , text: 'Gastos por categoría en el mes actual'
+                        , text: 'Gastos por categoría - ' + @json($mes)
                     }
                 }
             }

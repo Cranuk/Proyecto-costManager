@@ -59,7 +59,8 @@ class FilterController extends Controller
         $year = $request->input('year');
 
         $balances = Helpers::getBalance($month, $year);
+        $chartExpenses = Helpers::chartExpense($month, $year);
 
-        return view('index', compact('balances'));
+        return view('main', compact('balances', 'chartExpenses'));
     }
 }

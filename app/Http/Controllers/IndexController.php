@@ -3,20 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helpers;
-use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $month = $request->input('month');
-        $year = $request->input('year');
-
-        $balances = Helpers::getBalance($month, $year);
+        $balances = Helpers::getBalance();
         $chartExpenses = Helpers::chartExpense();
-        return view('main', [
-            'balances' => $balances,
-            'chartExpenses' => $chartExpenses
-        ]);
+        return view('main', compact('balances', 'chartExpenses'));
     }
 }

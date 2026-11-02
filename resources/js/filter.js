@@ -4,64 +4,15 @@ document.addEventListener('DOMContentLoaded', function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    let filtroEn = "";
 
-    // Abrir modal y cargar selects
-    $('#filter-link').on('click', function(e){
-        e.preventDefault();
-
-        filtroEn = $(this).data('table');
-        let action = '/filters/table';
-
-        $('#table').val(filtroEn);
-        $('#filter-form').attr('action', action);
-
-        console.log(filtroEn);
-
-        $.ajax({
-            url: '/filters/date',
-            method: 'GET',
-            dataType: 'json',
-            success: function(response) {
-                let years = response.years;
-                let months = response.months;
-
-                let yearSelect = $('#year');
-                let monthSelect = $('#month');
-
-                yearSelect.empty();
-                monthSelect.empty();
-
-                // Carga de datos al select año
-                years.forEach(function(year) {
-                    yearSelect.append($('<option>', {
-                        value: year,
-                        text: year
-                    }).addClass('input-select'));
-                });
-
-                // Carga de datos al select mes
-                $.each(months, function(key, value) {
-                    monthSelect.append($('<option>', {
-                        value: key,
-                        text: value
-                    }).addClass('input-select'));
-                });
-
-                // Muestro el modal una vez cargados los selects
-                $('#filter-modal').removeClass('d-none').hide().fadeIn(400);
-            },
-            error: function(error) {
-                console.error('Error al cargar los select de fechas:', error);
-                console.error(action);
-            }
-        });
-    });
-
-    $('#filter-home-link').on('click', function(e){
-        e.preventDefault();
-        $('#filter-form').attr('action', '/filters/balance');
-        console.log("¡Hice clic en el botón de filtro!");
+    function abrirModalConFechas(actionUrl, tableValue = '') {
+        $('#filter-form').attr('action', actionUrl);
+    
+        if (!tableValue) {
+            $('#table').prop('disabled', true).val('');
+        } else {
+            $('#table').prop('disabled', false).val(tableValue);
+        }
 
         $.ajax({
             url: '/filters/date',
@@ -75,22 +26,44 @@ document.addEventListener('DOMContentLoaded', function() {
                 monthSelect.empty();
 
                 response.years.forEach(function(year) {
-                    yearSelect.append($('<option>', { value: year, text: year }).addClass('input-select'));
+                    yearSelect.append($('<option>', {
+                        value: year,
+                        text: year
+                    }).addClass('input-select'));
                 });
 
                 $.each(response.months, function(key, value) {
-                    monthSelect.append($('<option>', { value: key, text: value }).addClass('input-select'));
+                    monthSelect.append($('<option>', {
+                        value: key,
+                        text: value
+                    }).addClass('input-select'));
                 });
 
                 $('#filter-modal').removeClass('d-none').hide().fadeIn(400);
             },
-            error: function(error) {
+            error: function(xhr, status, error) {
                 console.error('Error al cargar los select de fechas:', error);
-                console.error(action);
+                console.error('URL intentada:', actionUrl);
             }
         });
+    }
+
+    // Evento para las tablas
+    $('#filter-link').on('click', function(e){
+        e.preventDefault();
+        let filtroEn = $(this).data('table');
+        console.log("Tabla seleccionada:", filtroEn);
+        abrirModalConFechas('/filters/table', filtroEn);
     });
 
+    // Evento para el inicio / balances
+    $('#filter-home-link').on('click', function(e){
+        e.preventDefault();
+        console.log("¡Clic en el filtro del inicio!");
+        abrirModalConFechas('/filters/balance', '');
+    });
+
+    // Botón cancelar del modal
     $('#filter-modal .cancel').on('click', function() {
         $('#filter-modal').fadeOut(400, function() {
             $(this).addClass('d-none');

@@ -10,8 +10,6 @@ use NumberFormatter;
 
 class Helpers
 {
-    // TODO: aquí estarán los métodos que se usarán en toda la web, revisar igual si funciona como corresponde
-
     // NOTE: función para las fechas
     public static function formatDate($date)
     {
@@ -52,13 +50,16 @@ class Helpers
 
     public static function getBalance(?int $month = null, ?int $year = null)
     {
-        $balanceNegative = self::getBalanceNegative($month);
-        $balancePositive = self::getBalancePositive($year);
+        // CORREGIDO: Pasamos tanto el mes como el año a ambas funciones
+        $balanceNegative = self::getBalanceNegative($month, $year);
+        $balancePositive = self::getBalancePositive($month, $year);
+        
         $balanceTotal = $balancePositive - $balanceNegative;
+        
         return [
             'balanceNegative' => $balanceNegative,
             'balancePositive' => $balancePositive,
-            'balanceTotal' => $balanceTotal
+            'balanceTotal'    => $balanceTotal
         ];
     }
 
@@ -73,13 +74,15 @@ class Helpers
         return $date->translatedFormat('F Y');
     }
 
-    public static function chartExpense()
+    public static function chartExpense(?int $month = null, ?int $year = null)
     {
         $month = $month ?? Carbon::now()->month;
         $year  = $year ?? Carbon::now()->year;
 
         $start = Carbon::create($year, $month, 1)->startOfMonth();
         $end   = $start->copy()->endOfMonth();
+
+        $monthName = ucfirst($start->translatedFormat('F Y'));
 
         $expenseCategory = Category::withSum(['expenses' => function($query) use ($start, $end) {
                 $query->whereBetween('created_at', [$start, $end]);
@@ -90,7 +93,8 @@ class Helpers
         return [
             'categories' => $expenseCategory->pluck('name'),
             'color'      => $expenseCategory->map(fn($cat) => $cat->color ?? '#999999'),
-            'total'      => $expenseCategory->pluck('expenses_sum_amount')
+            'total'      => $expenseCategory->pluck('expenses_sum_amount'),
+            'mes'        => $monthName,
         ];
     }
 }
