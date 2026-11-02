@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\FilterController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\RevenueController;
 use Illuminate\Support\Facades\Route;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 // TODO: Acordarse que los names son mas para ser usados en los href para no poner la ruta completa de la misma
 
 // NOTE: Rutas para helper
-Route::get('/', [Controller::class, 'index'])->name('index');
+Route::get('/', [IndexController::class, 'index'])->name('index');
 
 // NOTE: Rutas para categorias
 Route::prefix('category')
@@ -55,7 +55,8 @@ Route::prefix('revenue')
 // NOTE: Rutas para filtros
 Route::controller(FilterController::class)->group(function () {
     Route::get('/filters/date', 'date')->name('obtainDate');
-    Route::post('/filters/table','filter')->name('filterDate');
+    Route::get('/filters/table','filter')->name('filterDate');
+    Route::get('/filters/balance', 'balance')->name('filterBalance');
 });
 
 // NOTE: Rutas para historial

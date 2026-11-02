@@ -28,28 +28,32 @@ class Helpers
     }
 
     // NOTE: funciones para balance
-    public static function getBalanceNegative(?Carbon $date = null)
+    public static function getBalanceNegative(?int $month = null, ?int $year = null)
     {
-        $date ??= Carbon::now();
-        $start = $date->copy()->startOfMonth();
-        $end   = $date->copy()->endOfMonth();
+        $month = $month ?? Carbon::now()->month;
+        $year  = $year ?? Carbon::now()->year;
+
+        $start = Carbon::create($year, $month, 1)->startOfMonth();
+        $end   = $start->copy()->endOfMonth();
 
         return Expense::whereBetween('created_at', [$start, $end])->sum('amount');
     }
 
-    public static function getBalancePositive(?Carbon $date = null)
+    public static function getBalancePositive(?int $month = null, ?int $year = null)
     {
-        $date ??= Carbon::now();
-        $start = $date->copy()->startOfMonth();
-        $end   = $date->copy()->endOfMonth();
+        $month = $month ?? Carbon::now()->month;
+        $year  = $year ?? Carbon::now()->year;
+
+        $start = Carbon::create($year, $month, 1)->startOfMonth();
+        $end   = $start->copy()->endOfMonth();
 
         return Revenue::whereBetween('created_at', [$start, $end])->sum('amount');
     }
 
-    public static function getBalance(?Carbon $date = null)
+    public static function getBalance(?int $month = null, ?int $year = null)
     {
-        $balanceNegative = self::getBalanceNegative($date);
-        $balancePositive = self::getBalancePositive($date);
+        $balanceNegative = self::getBalanceNegative($month);
+        $balancePositive = self::getBalancePositive($year);
         $balanceTotal = $balancePositive - $balanceNegative;
         return [
             'balanceNegative' => $balanceNegative,
@@ -71,9 +75,11 @@ class Helpers
 
     public static function chartExpense()
     {
-        $now   = Carbon::now();
-        $start = $now->copy()->startOfMonth();
-        $end   = $now->copy()->endOfMonth();
+        $month = $month ?? Carbon::now()->month;
+        $year  = $year ?? Carbon::now()->year;
+
+        $start = Carbon::create($year, $month, 1)->startOfMonth();
+        $end   = $start->copy()->endOfMonth();
 
         $expenseCategory = Category::withSum(['expenses' => function($query) use ($start, $end) {
                 $query->whereBetween('created_at', [$start, $end]);

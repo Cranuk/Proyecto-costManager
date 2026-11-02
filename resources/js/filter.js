@@ -58,6 +58,39 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    $('#filter-home-link').on('click', function(e){
+        e.preventDefault();
+        $('#filter-form').attr('action', '/filters/balance');
+        console.log("¡Hice clic en el botón de filtro!");
+
+        $.ajax({
+            url: '/filters/date',
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                let yearSelect = $('#year');
+                let monthSelect = $('#month');
+
+                yearSelect.empty();
+                monthSelect.empty();
+
+                response.years.forEach(function(year) {
+                    yearSelect.append($('<option>', { value: year, text: year }).addClass('input-select'));
+                });
+
+                $.each(response.months, function(key, value) {
+                    monthSelect.append($('<option>', { value: key, text: value }).addClass('input-select'));
+                });
+
+                $('#filter-modal').removeClass('d-none').hide().fadeIn(400);
+            },
+            error: function(error) {
+                console.error('Error al cargar los select de fechas:', error);
+                console.error(action);
+            }
+        });
+    });
+
     $('#filter-modal .cancel').on('click', function() {
         $('#filter-modal').fadeOut(400, function() {
             $(this).addClass('d-none');

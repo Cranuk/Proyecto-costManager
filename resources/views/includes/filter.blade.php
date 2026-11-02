@@ -1,7 +1,6 @@
 <div id="filter-modal" class="custom-modal d-none" tabindex="-1" aria-hidden="true">
     <div>
-        <form id="filter-form" class="form-style" method="POST">
-            @csrf
+        <form id="filter-form" class="form-style" method="GET">
             <div class="space-20"></div>
 
             <div class="subtitle underlined center">

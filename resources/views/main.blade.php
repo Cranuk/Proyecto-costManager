@@ -3,6 +3,15 @@
 @section('title', 'Pagina de inicio')
 
 @section('content-main')
+<div class="header-option">
+    <div class="menu-list">
+        <a href="#" id="filter-home-link" title="Filtrar balances">
+            <span class="material-symbols-outlined icon-medium hover:text-amber-600 duration-300">
+                filter_list
+            </span>
+        </a>
+    </div>
+</div>
 @if($balances['balancePositive'])
 <div class="flex justify-center">
     <div class="container-balances">

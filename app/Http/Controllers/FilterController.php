@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helpers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -41,7 +42,7 @@ class FilterController extends Controller
             ->whereMonth('created_at', '=', $month)
             ->whereYear('created_at', '=', $year);
 
-        $records = $query->paginate(5);
+        $records = $query->paginate(5)->appends($request->query());
         $count = $records->count();
 
         $page = $tableName . '.index';
@@ -50,5 +51,15 @@ class FilterController extends Controller
             'table' => $records,
             'count' => $count
         ]);
+    }
+
+    public function balance(Request $request)
+    {
+        $month = $request->input('month');
+        $year = $request->input('year');
+
+        $balances = Helpers::getBalance($month, $year);
+
+        return view('index', compact('balances'));
     }
 }
