@@ -63,6 +63,15 @@ class Helpers
         ];
     }
 
+    public static function getBalanceReport($period)
+    {
+        $date = Carbon::createFromFormat('Y-m', $period);
+        $month = $date->month;
+        $year  = $date->year;
+
+        return self::getBalance($month, $year);
+    }
+
     public static function nameCategory($id)
     {
         return Category::where('id', $id)->value('name') ?? 'Sin Categoría';

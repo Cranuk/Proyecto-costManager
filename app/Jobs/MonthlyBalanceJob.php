@@ -25,7 +25,7 @@ class MonthlyBalanceJob
             ];
         }
 
-        $balance = Helpers::getBalance($lastMonth); // NOTE: obtenemos el balance del mes anterior
+        $balance = Helpers::getBalanceReport($period); // NOTE: obtenemos el balance del mes anterior
 
         $record = Record::create([
             'period' => $period,
